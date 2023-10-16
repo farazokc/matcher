@@ -1,0 +1,13 @@
+# Disable directory listing
+Options -Indexes
+
+# Enable rewriting
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /matrimonial_website/
+
+    # Redirect all requests to index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
