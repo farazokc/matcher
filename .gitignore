@@ -9,7 +9,7 @@
 *.sublime-workspace
 *.idea/
 .vscode/
-.vscode/*
+.vscode/
 
 # Ignore composer dependencies
 /vendor/
