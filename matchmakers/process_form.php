@@ -44,7 +44,7 @@ class clientModel
         $this->image = $_FILES['image'];
         $this->image_name = $_FILES['image']['name'];
         $this->img_tmp_name = $_FILES['image']['tmp_name'];
-        $this->targetDir = 'images/';
+        $this->targetDir = 'images' . DIRECTORY_SEPARATOR;
         $this->uploadOk = 1;
     }
 

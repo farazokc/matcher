@@ -48,8 +48,8 @@ include(__DIR__ . '/../session.php');
                             </div>
 
                             <div class="col-3">
-                                <label for="DOB" class="form-label">DOB</label>
-                                <input type="date" class="form-control" id="DOB" placeholder="DOB" value="2017-06-01"
+                                <label for="dob" class="form-label">DOB</label>
+                                <input type="date" class="form-control" id="dob" placeholder="" value="2020-10-14"
                                     required>
                             </div>
 
@@ -136,11 +136,11 @@ include(__DIR__ . '/../session.php');
         var first_name = $('#first_name').val();
         var last_name = $('#last_name').val();
         
-        var DOB = new Date($('#DOB').val());
-        // var day = DOB.getDate();
-        // var month = DOB.getMonth() + 1;
-        // var year = DOB.getFullYear();
-        // DOB = [day, month, year].join('-');
+        var DOB = new Date($('#dob').val());
+        var day = DOB.getDate();
+        var month = DOB.getMonth() + 1;
+        var year = DOB.getFullYear();
+        DOB = [year, month, day].join('-');
 
         var gender = $('#gender').val();
         var education = $('#education').val();
