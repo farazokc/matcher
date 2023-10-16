@@ -12,7 +12,6 @@ include(__DIR__ . '/../includes/header.php');
 include(__DIR__ . '/navbar.php');
 
 ?>
-
 <style>
     button a {
         text-decoration: none;
@@ -22,25 +21,16 @@ include(__DIR__ . '/navbar.php');
     }
 </style>
 
-<div class="dashboard-container">
+<div class="container">
     <h1>Welcome to User dashboard!</h1>
+    # TODO: ||
+    <br>
+    Card showing total clients <br>
+    Card showing boys list <br>
+    Card showing girls list <br><br>
+
+    <button><a href="add_client.php">Add new client</a></button>
+    <button><a href="view_all.php">View all clients(tabular)</a></button>
 </div>
-
-
-# TODO: ||
-<br>
-Card showing total clients <br>
-Card showing boys list <br>
-Card showing girls list <br><br>
-
-<!-- echo '<pre>'; var_dump($_SESSION); echo '</pre>' -->
-
-<!-- <button>
-    <a class="dropdown-item" href="../logout.php">Log out</a>
-</button> -->
-
-<button><a href="add_client.php">Add new client</a></button>
-<button><a href="view_all.php">View all clients(tabular)</a></button>
-
 
 <?php include(__DIR__ . '/../includes/footer.php'); ?>

@@ -8,7 +8,6 @@ if (!isset($_SESSION['users_id']) || !isset($_SESSION['users_email'])) {
     exit();
 }
 
-
 include(__DIR__ . '/../includes/header.php');
 include(__DIR__ . '/navbar.php');
 
@@ -47,14 +46,13 @@ $stmt = $db->executePreparedStatement($sql, $params);
 $clients = $db->fetchAll($stmt);
 ?>
 
-<div class="dashboard-container">
-    <h1>All clients</h1>
-    <p>Client count: <?php echo " ". count($clients) ?></p>
-    
-</div>
-
-
 <div class="container">
+    <div>
+        <h1>All clients</h1>
+        <p>Client count:
+            <?php echo " " . count($clients) ?>
+        </p>
+    </div>
     <table class="table table-hover table-responsive align-middle fs-5">
         <thead>
             <th>
@@ -94,10 +92,6 @@ $clients = $db->fetchAll($stmt);
                 <tr>
                     <td>
                         <img src="<?php echo "./../" . $row['photo_path'] ?>" alt="Image" style="max-width: 200px;">
-                        <?php
-                        // echo "Image source: " . dirname(__DIR__) . DIRECTORY_SEPARATOR . $row['photo_path'];
-                        // $img = glob(dirname(__DIR__) . DIRECTORY_SEPARATOR . $row['photo_path']);
-                        echo ''; ?>
                     </td>
                     <td>
                         <?php echo $row['first_name'] . " " . $row['last_name']; ?>
@@ -132,7 +126,6 @@ $clients = $db->fetchAll($stmt);
             <?php } ?>
         </tbody>
     </table>
-
 </div>
 
 

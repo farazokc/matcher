@@ -5,7 +5,7 @@
                 <li><a href="dashboard.php" class="nav-link px-2 link-secondary">Dashboard</a></li>
                 <li><a href="add_client.php" class="nav-link px-2 link-body-emphasis">Add New</a></li>
                 <li><a href="view_all.php" class="nav-link px-2 link-body-emphasis">View All</a></li>
-                <!-- <li><a href="#" class="nav-link px-2 link-body-emphasis">Search</a></li> -->
+                <li><a href="#" class="nav-link px-2 link-body-emphasis">Search</a></li>
             </ul>
             <div class="dropdown text-end">
                 <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"

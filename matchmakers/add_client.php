@@ -26,14 +26,13 @@ include(__DIR__ . '/../session.php');
 
 <div class="container">
     <main>
-        <div class="py-5 text-center">
+        <div class="text-center">
             <h2>Add Client Info</h2>
         </div>
         <div class="row g-5">
             <form id="client_form">
                 <div class="d-flex justify-content-center">
                     <div class="col-md-7 col-lg-8">
-                        <!-- <h4 class="mb-3"></h4> -->
                         <div class="row g-3">
                             <div class="col-sm-6">
                                 <label for="first_name" class="form-label">First name</label>
