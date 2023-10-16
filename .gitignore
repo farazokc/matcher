@@ -1,0 +1,47 @@
+# Ignore system files
+.DS_Store
+
+# Ignore user-specific files
+*.sublime-project
+*.sublime-workspace
+*.idea/
+.vscode/
+
+# Ignore composer dependencies
+/vendor/
+
+# Ignore logs and cache
+/log/
+/cache/
+
+# Ignore environment configuration
+.env
+
+# Ignore uploaded files
+/public/uploads/
+
+# Ignore node_modules (if using JavaScript)
+node_modules/
+
+# Ignore compiled code (if applicable)
+/public/assets/
+
+# Ignore database configuration and dumps
+/database.php
+/database.sql
+
+# Ignore config files with sensitive information
+/config/config.php
+
+# Ignore sensitive files with credentials
+/credentials.json
+
+# Ignore any other temporary or generated files
+*.swp
+*.swo
+*.log
+*.bak
+*.sql
+
+# Ignore Composer lock file
+composer.lock
