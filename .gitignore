@@ -1,3 +1,6 @@
+# Ignore files in the images folder (Only keep these files on the local machine)
+/images/*.*
+
 # Ignore system files
 .DS_Store
 
@@ -6,6 +9,7 @@
 *.sublime-workspace
 *.idea/
 .vscode/
+.vscode/*
 
 # Ignore composer dependencies
 /vendor/
