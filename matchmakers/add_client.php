@@ -64,14 +64,17 @@ include(__DIR__ . '/../session.php');
                             <div class="col-6">
                                 <label for="education" class="form-label">Education</label>
                                 <input type="text" class="form-control" id="education" value="asd" placeholder="">
-
                             </div>
 
                             <div class="col-12">
                                 <label for="address" class="form-label">Address</label>
                                 <input type="text" class="form-control" id="address" value="asd"
                                     placeholder="1234 Main St" required>
+                            </div>
 
+                            <div class="col-3">
+                                <label for="occupation" class="form-label">Occupation</label>
+                                <input type="text" class="form-control" id="occupation" value="asd" placeholder="">
                             </div>
 
                             <div class="col-3">
@@ -79,7 +82,7 @@ include(__DIR__ . '/../session.php');
                                 <input type="number" class="form-control" id="income" value="123" placeholder="">
                             </div>
 
-                            <div class="col-9">
+                            <div class="col-6">
                                 <label for="description" class="form-label">Description</label>
                                 <textarea class="form-control" name="description" id="description" cols="90"
                                     rows="5">Default</textarea>
@@ -141,6 +144,7 @@ include(__DIR__ . '/../session.php');
 
         var gender = $('#gender').val();
         var education = $('#education').val();
+        var occupation = $('#occupation').val();
         var address = $('#address').val();
         var income = $('#income').val();
         var description = $('#description').val();
@@ -151,6 +155,7 @@ include(__DIR__ . '/../session.php');
         console.log("DOB: ", DOB);
         console.log("Gender", gender);
         console.log("Education: ", education);
+        console.log("Occupation: ", occupation);
         console.log("Address: ", address);
         console.log("Income: ", income);
         console.log("Description: ", description);
@@ -164,6 +169,7 @@ include(__DIR__ . '/../session.php');
         formData.append('DOB', DOB);
         formData.append('gender', gender);
         formData.append('education', education);
+        formData.append('occupation', occupation);
         formData.append('address', address);
         formData.append('income', income);
         formData.append('description', description);

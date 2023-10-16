@@ -16,7 +16,6 @@ class clientModel
     public $location;
     public $description;
 
-
     public $image;
     public $image_name;
     public $img_tmp_name;
@@ -27,6 +26,7 @@ class clientModel
 
     public function __construct()
     {
+        // client stuff
         $this->client_id = getIncrementId();
         $this->matchmaker_id = $_SESSION['matchmakers_id'];
         $this->gender = $_POST['gender'];
@@ -39,8 +39,6 @@ class clientModel
         $this->income = $_POST['income'];
         $this->location = $_POST['address'];
         $this->description = $_POST['description'];
-
-
 
         // image stuff
         $this->image = $_FILES['image'];
@@ -94,11 +92,12 @@ class clientModel
     public function checkImageReal()
     {
         // Check if image file is a actual image or fake image
-        if (!(getimagesize($this->img_tmp_name))) {
-            $this->uploadOk = 0;
-            return 0;
+        // echo "img_tmp_name" . $this->img_tmp_name;
+        $check = getimagesize($this->img_tmp_name);
+        if ($check) {
+            return 1;
         }
-        return 1;
+        return 0;
     }
 
     public function checkUnderFileSize()
@@ -112,18 +111,19 @@ class clientModel
     public function checkFileExtAllowed()
     {
         $allowed = array('jpg', 'jpeg', 'png', 'gif');
-        if (!in_array($this->imageFileType, $allowed)) {
-            return 0;
+        if (in_array($this->imageFileType, $allowed)) {
+            return 1;
         }
-        return 1;
+        return 0;
     }
 
-    public function insertToDB(){
+    public function insertToDB()
+    {
         global $db;
 
         if (move_uploaded_file($this->img_tmp_name, __DIR__ . "/../" . ($this->targetFile))) {
             $sql = "INSERT INTO clients (matchmaker_id, gender, first_name, last_name, dob, photo_path, education, occupation, income, location, description) VALUES (:matchmaker_id, :gender, :first_name, :last_name, :dob, :photo_path, :education, :occupation, :income, :location, :description)";
-    
+
             $params = [
                 // match parameters to values
                 ':matchmaker_id' => $this->matchmaker_id,
@@ -138,7 +138,7 @@ class clientModel
                 ':location' => $this->address,
                 ':description' => $this->description
             ];
-    
+
             $stmt = $db->executePreparedStatement($sql, $params);
             echo "success"; // Image uploaded successfully
         } else {
@@ -211,16 +211,10 @@ function getIncrementId()
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $client = new clientModel();
-    
+
     //check for existing records
     if ($client->checkForExistingRecords()) {
         echo "existingRecord";
-        return;
-    }
-
-    // check if file exists
-    if (file_exists($client->targetFile)) {
-        echo "File already exists";
         return;
     }
 
@@ -231,26 +225,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $client->setTargetFile();
 
     // check if image is real
-    if($client->checkImageReal()){
+    if (!($client->checkImageReal())) {
         echo "fakeImgError";
         $client->uploadOk = 0;
         return;
     }
 
     // check file size under 5MB
-    if($client->checkUnderFileSize()){
+    if (!($client->checkUnderFileSize())) {
         echo "sizeError";
         $client->uploadOk = 0;
         return;
     }
 
     // check if file ext is allowed
-    if($client->checkFileExtAllowed()){
+    if (!($client->checkFileExtAllowed())) {
         echo "extError";
         $client->uploadOk = 0;
         return;
     }
-    
+
+    // check if file exists
+    if (file_exists($client->targetFile)) {
+        echo "File already exists";
+        return;
+    }
+
     // insert to db
     $client->insertToDB();
 
