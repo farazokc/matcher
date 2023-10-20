@@ -45,7 +45,6 @@ node_modules/
 *.swo
 *.log
 *.bak
-*.sql
 
 # Ignore Composer lock file
 composer.lock

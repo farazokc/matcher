@@ -126,7 +126,17 @@ include(__DIR__ . '/../session.php');
         reader.readAsDataURL(file);
     });
 
-    // $('#client_form').on('submit', function (event) {
+    const clearPage = () => {
+        // Reset input fields
+        $('#client_form')[0].reset();
+
+        // Reset image preview
+        $('#imagePreview').attr('src', '').hide();
+
+        // Reset file input (optional)
+        $('#image').val('');
+    }
+
     document.getElementById('client_form').addEventListener('submit', function (event) {
         event.preventDefault();
         var image = $('#image');
@@ -134,7 +144,7 @@ include(__DIR__ . '/../session.php');
 
         var first_name = $('#first_name').val();
         var last_name = $('#last_name').val();
-        
+
         var DOB = new Date($('#dob').val());
         var day = DOB.getDate();
         var month = DOB.getMonth() + 1;
@@ -148,18 +158,18 @@ include(__DIR__ . '/../session.php');
         var income = $('#income').val();
         var description = $('#description').val();
 
-        console.log("LOGGING INDIVIDUAL DATA: ")
-        console.log("First name: ", first_name);
-        console.log("Last name: ", last_name);
-        console.log("DOB: ", DOB);
-        console.log("Gender", gender);
-        console.log("Education: ", education);
-        console.log("Occupation: ", occupation);
-        console.log("Address: ", address);
-        console.log("Income: ", income);
-        console.log("Description: ", description);
-        console.log("Image prop('files'): ", image.prop('files'));
-        console.log("Image data: ", image_data);
+        // console.log("LOGGING INDIVIDUAL DATA: ")
+        // console.log("First name: ", first_name);
+        // console.log("Last name: ", last_name);
+        // console.log("DOB: ", DOB);
+        // console.log("Gender", gender);
+        // console.log("Education: ", education);
+        // console.log("Occupation: ", occupation);
+        // console.log("Address: ", address);
+        // console.log("Income: ", income);
+        // console.log("Description: ", description);
+        // console.log("Image prop('files'): ", image.prop('files'));
+        // console.log("Image data: ", image_data);
 
 
         var formData = new FormData();
@@ -173,39 +183,34 @@ include(__DIR__ . '/../session.php');
         formData.append('income', income);
         formData.append('description', description);
         formData.append('image', image_data);
-        
+
         $.ajax({
-        	url: "process_form.php",
-        	type: "POST",
-        	data: formData,
-        	contentType:false,
-        	cache: false,
-        	processData: false,
-        	success: function(data){
-        		if(data == "success"){
-        			alert('Image Uploaded successfully');
-        		} else if(data == "fakeImgError") {
+            url: "process_form.php",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                if (data == "success") {
+                    alert('Image Uploaded successfully');
+                } else if (data == "fakeImgError") {
                     alert("Image uploaded is fake");
-                }else if (data == "existingRecord"){
-          			alert('Client already exists');
-                }else if(data == "fileError"){
-        			alert("Error uploading file");
-        		}else if(data == "extError"){
-        			alert('File image format other than jpg, jpeg, png, gif not allowed');
-        		}else if(data == "sizeError"){
-        			alert('File size larger than 5MB not allowed');
-        		}
-        	},
-            error: function(e){
+                } else if (data == "existingRecord") {
+                    alert('Client already exists');
+                } else if (data == "fileError") {
+                    alert("Error uploading file");
+                } else if (data == "extError") {
+                    alert('File image format other than jpg, jpeg, png, gif not allowed');
+                } else if (data == "sizeError") {
+                    alert('File size larger than 5MB not allowed');
+                }
+
+                clearPage();
+            },
+            error: function (e) {
                 alert(e);
             }
         });
     });
-
-    // Function to get user ID (replace this with your actual method)
-    function getUserId() {
-
-    }
-
-
 </script>
