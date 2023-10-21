@@ -59,9 +59,9 @@ include('includes/header.php');
     }
 
     async function loginUser(email, password, type) {
-        console.log("email: ", email);
-        console.log("password: ", password);
-        console.log("type: ", type);
+        // console.log("email: ", email);
+        // console.log("password: ", password);
+        // console.log("type: ", type);
         try {
             const response = await fetch('login_process.php', {
                 method: 'POST',
@@ -76,12 +76,12 @@ include('includes/header.php');
             }
 
             const data = await response.json();
-            console.log(data);
+            // console.log(data);
 
             if (data.success && data.message == "pwd") {
                 document.getElementById("wrong-password-alert").classList.remove("d-none");
             } else if (data.success && data.message == "user") {
-                window.location.href = './matchmakers/dashboard.php';
+                window.location.href = './matchmakers/view_all.php';
             } else if (data.success && data.message == "pending") {
                 window.location.href = './admin/pending.php';
             } else if (data.success && data.message == "admin") {

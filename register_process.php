@@ -2,7 +2,6 @@
 include('includes/database.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];
@@ -65,13 +64,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // $_SESSION['id'] = $row['id'];
             $_SESSION['email'] = $row['email'];
     
-            header("Location: matchmakers/dashboard.php");
+            header("Location: matchmakers/view_all.php");
             exit();
         } catch (PDOException $e) {
             die("Error: " . $e->getMessage());
         }
     } else if ($type == 'admin') {
-        header("Location: admin/dashboard.php");
+        header("Location: admin/pending.php");
         exit();
     }
 } else {

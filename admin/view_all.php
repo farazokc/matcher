@@ -1,10 +1,8 @@
-<!-- admin/dashboard.php -->
-
+<!-- matchmakers/dashboard.php -->
 <?php
 include(__DIR__ . '/../session.php');
 
-if (!isset($_SESSION['users_email'])) {
-    global $home;
+if (!isset($_SESSION['users_id']) || !isset($_SESSION['users_email'])) {
     header("Location: " . dirname(__DIR__) . DIRECTORY_SEPARATOR . "index.php");
     exit();
 }
@@ -14,7 +12,11 @@ include(__DIR__ . '/navbar.php');
 
 global $db;
 
+// Get the logged-in matchmaker's user ID
+$user_id = $_SESSION['users_id'];
+
 $sql = "SELECT * FROM clients";
+
 $params = [];
 
 $stmt = $db->executePreparedStatement($sql, $params);
@@ -42,28 +44,14 @@ foreach ($records as $key => $record) {
         $records[$key]['matchmaker_name'] = $matchmaker['first_name'] . " " . $matchmaker['last_name'];
     }
 }
-
 ?>
-<style>
-    button a {
-        text-decoration: none;
-        /* Remove underline */
-        color: inherit;
-        /* Inherit color from parent element (button) */
-    }
-</style>
-
-<div class="container-fluid">
-    <!-- <h1 class="text-center">Welcome, <?php  ?></h1> -->
-    <h1 class="text-center">Welcome, Admin</h1>
-</div>
 
 <div class="container-fluid">
     <div>
-        <h3>Number of total clients:
+        <h1>All clients</h1>
+        <p>Client count:
             <?php echo " " . count($records) ?>
-        </h3>
-        <h2>Details</h2>
+        </p>
     </div>
     <table class="table table-hover table-striped-columns table-responsive align-middle fs-6 text-center">
         <thead>
@@ -139,3 +127,4 @@ foreach ($records as $key => $record) {
 </div>
 
 <?php include(__DIR__ . '/../includes/footer.php'); ?>
+

@@ -10,6 +10,7 @@ if (!isset($_SESSION['users_id']) || !isset($_SESSION['users_email'])) {
 
 include(__DIR__ . '/../includes/header.php');
 include(__DIR__ . '/navbar.php');
+include(__DIR__ . '/dashboard.php');
 
 global $db;
 
@@ -53,7 +54,7 @@ $clients = $db->fetchAll($stmt);
             <?php echo " " . count($clients) ?>
         </p>
     </div>
-    <table class="table table-hover table-striped-columns table-responsive align-middle fs-5">
+    <table class="table table-hover table-striped-columns table-responsive align-middle fs-5 text-center">
         <thead>
             <th>
                 Image
