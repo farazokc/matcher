@@ -13,9 +13,12 @@ include('includes/header.php');
     <main class="form-signin w-100 m-auto">
         <form onsubmit="login(event)" method="POST">
             <h1 class="h3 mb-3 fw-normal">Sign in</h1>
-            <div class="alert alert-danger fade show d-none" id="wrong-password-alert" role="alert">
-                Incorrect email or password
+
+            <div class="alert alert-danger alert-dismissible d-none fade show" id="wrong-password-alert" role="alert">
+                <strong>Incorrect email or password</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
+
             <div class="form-floating">
                 <input type="email" class="form-control" name="email" id="email" placeholder="" required>
                 <label for="email">Email address</label>
@@ -47,6 +50,9 @@ include('includes/header.php');
         </form>
     </main>
 </div>
+
+<?php include('includes/footer.php'); ?>
+
 <script>
     async function login(event) {
         event.preventDefault();
@@ -59,9 +65,6 @@ include('includes/header.php');
     }
 
     async function loginUser(email, password, type) {
-        // console.log("email: ", email);
-        // console.log("password: ", password);
-        // console.log("type: ", type);
         try {
             const response = await fetch('login_process.php', {
                 method: 'POST',
@@ -78,7 +81,7 @@ include('includes/header.php');
             const data = await response.json();
             // console.log(data);
 
-            if (data.success && data.message == "pwd") {
+            if (!data.success && data.message == "pwd") {
                 document.getElementById("wrong-password-alert").classList.remove("d-none");
             } else if (data.success && data.message == "user") {
                 window.location.href = './matchmakers/view_all.php';
@@ -93,5 +96,3 @@ include('includes/header.php');
     }
 
 </script>
-
-<?php include('includes/footer.php'); ?>

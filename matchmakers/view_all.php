@@ -1,6 +1,7 @@
 <!-- matchmakers/dashboard.php -->
 <?php
-include(__DIR__ . '/../session.php');
+include(__DIR__ . '\\..\\session.php');
+// include(dirname(__DIR__) . '\\session.php');
 
 if (!isset($_SESSION['users_id']) || !isset($_SESSION['users_email'])) {
     // Redirect to login page if not logged in as a matchmaker
@@ -15,6 +16,11 @@ include(__DIR__ . '/dashboard.php');
 global $db;
 
 // Get the logged-in matchmaker's user ID
+// echo "SESSION Dump: <br>";
+// echo "<pre>";
+// echo var_dump($_SESSION);
+// echo "</pre>";
+
 $user_id = $_SESSION['users_id'];
 
 // Get the matchmaker's ID from clients table
@@ -44,82 +50,92 @@ $params = [
 ];
 
 $stmt = $db->executePreparedStatement($sql, $params);
-$clients = $db->fetchAll($stmt);
+
+if ($stmt->rowCount() == 0) {
+    $clients = [];
+} else {
+    $clients = $db->fetchAll($stmt);
+}
+
 ?>
 
-<div class="container">
-    <div>
-        <h1>All clients</h1>
-        <p>Client count:
-            <?php echo " " . count($clients) ?>
-        </p>
-    </div>
-    <table class="table table-hover table-striped-columns table-responsive align-middle fs-5 text-center">
-        <thead>
-            <th>
-                Image
-            </th>
-            <th>
-                Full Name
-            </th>
-            <th>
-                DOB
-            </th>
-            <th>
-                Gender
-            </th>
-            <th>
-                Education
-            </th>
-            <th>
-                Occupation
-            </th>
-            <th>
-                Income
-            </th>
-            <th>
-                Address
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-                Actions
-            </th>
-        </thead>
-        <tbody>
-            <?php
-            foreach ($clients as $row) { ?>
-                <tr>
-                    <td>
-                        <img src="<?php echo "./../" . $row['photo_path'] ?>" alt="Image" style="max-width: 200px;">
-                    </td>
-                    <td>
-                        <?php echo $row['first_name'] . " " . $row['last_name']; ?>
-                    </td>
-                    <td>
-                        <?php echo $row['dob']; ?>
-                    </td>
-                    <td>
-                        <?php echo $row['gender']; ?>
-                    </td>
-                    <td>
-                        <?php echo $row['education']; ?>
-                    </td>
-                    <td>
-                        <?php echo $row['occupation']; ?>
-                    </td>
-                    <td>
-                        <?php echo $row['income']; ?>
-                    </td>
-                    <td>
-                        <?php echo $row['location']; ?>
-                    </td>
-                    <td>
-                        <?php echo $row['description']; ?>
-                    </td>
-                    <td>
-                        <!-- <div>
+
+<div class="container-fluid">
+    <?php if ($clients == []) {
+        echo "<h3>No clients have been added</h3>";
+    } else {
+        ?>
+        <div>
+            <h4>Number of total clients:
+                <?php echo " " . count($clients) ?>
+            </h4>
+        </div>
+        <table class="table table-hover table-striped-columns table-responsive align-middle fs-5 text-center">
+            <thead>
+                <th>
+                    Image
+                </th>
+                <th>
+                    Full Name
+                </th>
+                <th>
+                    DOB
+                </th>
+                <th>
+                    Gender
+                </th>
+                <th>
+                    Education
+                </th>
+                <th>
+                    Occupation
+                </th>
+                <th>
+                    Income
+                </th>
+                <th>
+                    Address
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Actions
+                </th>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($clients as $row) { ?>
+                    <tr>
+                        <td>
+                            <img src="<?php echo "./../" . $row['photo_path'] ?>" alt="Image" style="max-width: 200px;">
+                        </td>
+                        <td>
+                            <?php echo $row['first_name'] . " " . $row['last_name']; ?>
+                        </td>
+                        <td>
+                            <?php echo $row['dob']; ?>
+                        </td>
+                        <td>
+                            <?php echo $row['gender']; ?>
+                        </td>
+                        <td>
+                            <?php echo $row['education']; ?>
+                        </td>
+                        <td>
+                            <?php echo $row['occupation']; ?>
+                        </td>
+                        <td>
+                            <?php echo $row['income']; ?>
+                        </td>
+                        <td>
+                            <?php echo $row['location']; ?>
+                        </td>
+                        <td>
+                            <?php echo $row['description']; ?>
+                        </td>
+                        <td>
+                            <!-- <div>
                             <a class="view-client text-light" style="text-decoration: none;"
                                 href="<?php //echo "./view_client.php?id=" . $row['id'] ?>">
                                 <button class="btn btn-primary">
@@ -127,7 +143,7 @@ $clients = $db->fetchAll($stmt);
                                 </button>
                             </a>
                         </div> -->
-                        <!-- <div>
+                            <!-- <div>
                             <a class="edit-client text-light" style="text-decoration: none;"
                                 href="<?php //echo "./edit_client.php?id=" . $row['id'] ?>">
                                 <button class="btn btn-warning">
@@ -135,20 +151,21 @@ $clients = $db->fetchAll($stmt);
                                 </button>
                             </a>
                         </div> -->
-                        <div>
-                            <a class="delete-client text-light" style="text-decoration: none;"
-                                onclick='sendRequest("delete", <?php echo $row["id"]; ?>)'>
-                                <button class="btn btn-danger">
-                                    Delete
-                                </button>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            <?php } ?>
-        </tbody>
-    </table>
-</div>
+                            <div>
+                                <a class="delete-client text-light" style="text-decoration: none;"
+                                    onclick='sendRequest("delete", <?php echo $row["id"]; ?>)'>
+                                    <button class="btn btn-danger">
+                                        Delete
+                                    </button>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+<?php } ?>
 
 <?php include(__DIR__ . '/../includes/footer.php'); ?>
 
