@@ -128,7 +128,7 @@ foreach ($records as $key => $record) {
                             <?php echo $row['occupation']; ?>
                         </td>
                         <td>
-                            <?php echo $row['income']; ?>
+                            <?php echo $row['contact']; ?>
                         </td>
                         <td>
                             <?php echo $row['location']; ?>

@@ -12,7 +12,7 @@ class clientModel
     public $education;
     public $occupation;
     public $address;
-    public $income;
+    public $contact;
     public $location;
     public $description;
 
@@ -36,7 +36,7 @@ class clientModel
         $this->education = $_POST['education'];
         $this->occupation = $_POST['occupation'];
         $this->address = $_POST['address'];
-        $this->income = $_POST['income'];
+        $this->contact = $_POST['contact'];
         $this->location = $_POST['address'];
         $this->description = $_POST['description'];
 
@@ -122,7 +122,7 @@ class clientModel
         global $db;
 
         if (move_uploaded_file($this->img_tmp_name, __DIR__ . "/../" . ($this->targetFile))) {
-            $sql = "INSERT INTO clients (matchmaker_id, gender, first_name, last_name, dob, photo_path, education, occupation, income, location, description) VALUES (:matchmaker_id, :gender, :first_name, :last_name, :dob, :photo_path, :education, :occupation, :income, :location, :description)";
+            $sql = "INSERT INTO clients (matchmaker_id, gender, first_name, last_name, dob, photo_path, education, occupation, contact, location, description) VALUES (:matchmaker_id, :gender, :first_name, :last_name, :dob, :photo_path, :education, :occupation, :contact, :location, :description)";
 
             $params = [
                 // match parameters to values
@@ -134,7 +134,7 @@ class clientModel
                 ':photo_path' => $this->targetFile,
                 ':education' => $this->education,
                 ':occupation' => $this->address,
-                ':income' => $this->income,
+                ':contact' => $this->contact,
                 ':location' => $this->address,
                 ':description' => $this->description
             ];
@@ -269,7 +269,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // $gender = $_POST['gender'];
     // $education = $_POST['education'];
     // $address = $_POST['address'];
-    // $income = $_POST['income'];
+    // $contact = $_POST['contact'];
     // $description = $_POST['description'];
     // *******************************************************
 
@@ -315,7 +315,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // If everything is ok, try to upload file
     // if (move_uploaded_file($_FILES["image"]["tmp_name"], __DIR__ . "/../" . $targetFile)) {
-    //     $sql = "INSERT INTO clients (matchmaker_id, gender, first_name, last_name, dob, photo_path, education, occupation, income, location, description) VALUES (:matchmaker_id, :gender, :first_name, :last_name, :dob, :photo_path, :education, :occupation, :income, :location, :description)";
+    //     $sql = "INSERT INTO clients (matchmaker_id, gender, first_name, last_name, dob, photo_path, education, occupation, contact, location, description) VALUES (:matchmaker_id, :gender, :first_name, :last_name, :dob, :photo_path, :education, :occupation, :contact, :location, :description)";
 
     //     $params = [
     //         // match parameters to values
@@ -327,7 +327,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //         ':photo_path' => $targetFile,
     //         ':education' => $education,
     //         ':occupation' => $address,
-    //         ':income' => $income,
+    //         ':contact' => $contact,
     //         ':location' => $address,
     //         ':description' => $description
     //     ];

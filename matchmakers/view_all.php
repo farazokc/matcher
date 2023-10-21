@@ -56,7 +56,6 @@ if ($stmt->rowCount() == 0) {
 } else {
     $clients = $db->fetchAll($stmt);
 }
-
 ?>
 
 
@@ -108,7 +107,7 @@ if ($stmt->rowCount() == 0) {
                 foreach ($clients as $row) { ?>
                     <tr>
                         <td>
-                            <img src="<?php echo "./../" . $row['photo_path'] ?>" alt="Image" style="max-width: 200px;">
+                            <img src="<?php echo "./../" . $row['photo_path'] ?>" alt="Image" style="max-width: 100px;">
                         </td>
                         <td>
                             <?php echo $row['first_name'] . " " . $row['last_name']; ?>
@@ -126,7 +125,7 @@ if ($stmt->rowCount() == 0) {
                             <?php echo $row['occupation']; ?>
                         </td>
                         <td>
-                            <?php echo $row['income']; ?>
+                            <?php echo $row['contact']; ?>
                         </td>
                         <td>
                             <?php echo $row['location']; ?>
