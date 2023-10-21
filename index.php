@@ -9,7 +9,7 @@ include('includes/header.php');
     }
 </style>
 
-<div class="d-flex align-items-center py-4 bg-body-tertiary h-100">
+<body class="d-flex align-items-center py-4 bg-body-tertiary h-100">
     <main class="form-signin w-100 m-auto">
         <form onsubmit="login(event)" method="POST">
             <h1 class="h3 mb-3 fw-normal">Sign in</h1>
@@ -49,7 +49,7 @@ include('includes/header.php');
             <p class="mt-5 mb-3 text-body-secondary">&copy; MKAGI</p>
         </form>
     </main>
-</div>
+</body>
 
 <?php include('includes/footer.php'); ?>
 
@@ -94,5 +94,4 @@ include('includes/header.php');
             console.log(e);
         }
     }
-
 </script>

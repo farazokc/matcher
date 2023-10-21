@@ -79,7 +79,7 @@ class clientModel
     public function setImageFileType()
     {
         $exp = explode(".", $this->image_name);
-        $this->imageFileType = end($exp);
+        $this->imageFileType = strtolower(end($exp));
         return;
     }
 

@@ -107,7 +107,7 @@ foreach ($records as $key => $record) {
                 foreach ($records as $row) { ?>
                     <tr>
                         <td>
-                            <img src="<?php echo "./../" . $row['photo_path'] ?>" alt="Image" style="max-width: 200px;">
+                            <img src="<?php echo "./../" . $row['photo_path'] ?>" alt="Image" style="max-width: 100px;">
                         </td>
                         <td>
                             <?php echo $row['matchmaker_name']; ?>
