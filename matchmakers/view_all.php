@@ -119,22 +119,22 @@ $clients = $db->fetchAll($stmt);
                         <?php echo $row['description']; ?>
                     </td>
                     <td>
-                        <div>
+                        <!-- <div>
                             <a class="view-client text-light" style="text-decoration: none;"
-                                href="<?php echo "./view_client.php?id=" . $row['id'] ?>">
+                                href="<?php //echo "./view_client.php?id=" . $row['id'] ?>">
                                 <button class="btn btn-primary">
                                     View
                                 </button>
                             </a>
-                        </div>
-                        <div>
+                        </div> -->
+                        <!-- <div>
                             <a class="edit-client text-light" style="text-decoration: none;"
-                                href="<?php echo "./edit_client.php?id=" . $row['id'] ?>">
+                                href="<?php //echo "./edit_client.php?id=" . $row['id'] ?>">
                                 <button class="btn btn-warning">
                                     Edit
                                 </button>
                             </a>
-                        </div>
+                        </div> -->
                         <div>
                             <a class="delete-client text-light" style="text-decoration: none;"
                                 onclick='sendRequest("delete", <?php echo $row["id"]; ?>)'>
