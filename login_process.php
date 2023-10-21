@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $_SESSION['users_id'] = $row['id'];
         $_SESSION['users_type'] = $type;
+        $_SESSION['users_is_admin'] = $row['is_admin'];
         $_SESSION['users_email'] = $row['email'];
 
         $response = array(

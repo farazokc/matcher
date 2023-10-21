@@ -59,10 +59,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $row = $db->fetchRow($stmt);
 
 
-            $_SESSION['user_id'] = $row['user_id'];
-            $_SESSION['type'] = $type;
-            // $_SESSION['id'] = $row['id'];
-            $_SESSION['email'] = $row['email'];
+            // $_SESSION['users_id'] = $row['id'];
+            // $_SESSION['users_type'] = $type;
+            // $_SESSION['users_is_admin'] = $row['is_admin'];
+            // $_SESSION['users_email'] = $row['email'];
+
+            $_SESSION['users_id'] = $row['user_id'];
+            $_SESSION['users_type'] = $type;
+            $_SESSION['users_is_admin'] = $type_val;
+            $_SESSION['users_email'] = $row['email'];
     
             header("Location: matchmakers/view_all.php");
             exit();
