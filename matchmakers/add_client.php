@@ -27,7 +27,7 @@ include(__DIR__ . '/navbar.php');
 <div class="container">
     <main>
         <div class="text-center">
-            <h2>Add Client Info</h2>
+            <h2>Add New Client</h2>
             <small>All fields are required</small>
             <div class="mb-3"></div>
         </div>
@@ -42,13 +42,13 @@ include(__DIR__ . '/navbar.php');
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <label for="first_name" class="form-label">First name</label>
                                 <input type="text" class="form-control" id="first_name" placeholder="" value=""
                                     maxlength="50" minlength="3" >
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <label for="last_name" class="form-label">Last name</label>
                                 <input type="text" class="form-control" id="last_name" placeholder="" value=""
                                     maxlength="50" minlength="3" >
@@ -73,7 +73,7 @@ include(__DIR__ . '/navbar.php');
                                     value="" placeholder="">
                             </div>
 
-                            <div class="col-12">
+                            <div class="col-6">
                                 <label for="address" class="form-label">Address</label>
                                 <input type="text" class="form-control" id="address" value="" placeholder="1234 Main St"
                                     maxlength="100" minlength="3" >
@@ -92,7 +92,7 @@ include(__DIR__ . '/navbar.php');
 
                             <div class="col-6">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" name="description" id="description" cols="90" rows="5"
+                                <textarea class="form-control" name="description" id="description" cols="90" rows="1"
                                     maxlength="400" minlength="5"></textarea>
                             </div>
                         </div>
@@ -104,7 +104,7 @@ include(__DIR__ . '/navbar.php');
                             <div class="col"></div>
                             <div class="col-8">
                                 <img id="imagePreview" src="#" alt="Image Preview"
-                                    style="max-width: 100%; display: none;">
+                                    style="max-width: 100px; display: none;">
                             </div>
                         </div>
                         <hr class="my-4">
@@ -274,7 +274,7 @@ include(__DIR__ . '/navbar.php');
                 processData: false,
                 success: function (data) {
                     if (data == "success") {
-                        alert('Image Uploaded successfully');
+                        alert('Record added successfully');
                     } else if (data == "fakeImgError") {
                         alert("Image uploaded is fake");
                     } else if (data == "existingRecord") {
