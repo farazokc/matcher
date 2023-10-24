@@ -3,25 +3,49 @@ include(__DIR__ . '/../session.php');
 
 class clientModel
 {
+    // all form fields that are being received
     public $client_id;
     public $matchmaker_id;
+    public $name;
+    public $age;
     public $gender;
-    public $first_name;
-    public $last_name;
-    public $dob;
+    public $cnic;
+    public $cast;
+    public $maslak;
+    public $mother_tongue;
+    public $height;
+    public $marital_status;
+    public $div_reason;
     public $education;
-    public $occupation;
+    public $job;
+    public $business;
+    public $income;
+    public $area;
+    public $city;
+    public $country;
     public $address;
+    public $belongs;
+    public $family_status;
+    public $home_status;
     public $contact;
-    public $location;
-    public $description;
+    public $father_name;
+    public $mother_name;
+    public $sisters_count;
+    public $brothers_count;
+    public $req_age;
+    public $req_cast;
+    public $req_height;
+    public $req_status;
+    public $req_income;
+    public $req_maslak;
+    public $req_education;
+    public $req_area;
 
-    public $image;
-    public $image_name;
-    public $img_tmp_name;
-    public $imageFileType;
-    public $targetDir;
-    public $targetFile;
+    public $images = [];
+    public $image_names = [];
+    public $img_tmp_name = [];
+    private $target_dir = "uploads/";
+    public $targetFiles = [];
     public $uploadOk;
 
     public function __construct()
@@ -29,16 +53,53 @@ class clientModel
         // client stuff
         $this->client_id = getIncrementId();
         $this->matchmaker_id = $_SESSION['matchmakers_id'];
+
+        // ************** Personal Information ****************
+
+        $this->name = strtolower($_POST['name']);
         $this->gender = $_POST['gender'];
-        $this->first_name = strtolower($_POST['first_name']);
-        $this->last_name = strtolower($_POST['last_name']);
-        $this->dob = date('Y-m-d', strtotime($_POST['DOB']));
+        $this->age = $_POST['age'];
+        $this->cnic = $_POST['cnic'];
+        $this->cast = $_POST['cast'];
+        $this->maslak = $_POST['maslak'];
+        $this->mother_tongue = $_POST['mother_tongue'];
+        $this->height = $_POST['height'];
+        $this->marital_status = $_POST['marital_status'];
+        $this->div_reason = $_POST['div_reason'];
         $this->education = $_POST['education'];
-        $this->occupation = $_POST['occupation'];
+        $this->job = $_POST['job'];
+        $this->business = $_POST['business'];
+        $this->income = $_POST['income'];
+        
+
+        // ************** Family Information ****************
+
+        $this->area = $_POST['area'];
+        $this->city = $_POST['city'];
+        $this->country = $_POST['country'];
         $this->address = $_POST['address'];
+        $this->belongs = $_POST['belongs'];
+        $this->family_status = $_POST['family_status'];
+        $this->home_status = $_POST['home_status'];
         $this->contact = $_POST['contact'];
-        $this->location = $_POST['address'];
-        $this->description = $_POST['description'];
+
+        // ************** Siblings Information ****************
+
+        $this->father_name = $_POST['father_name'];
+        $this->mother_name = $_POST['mother_name'];
+        $this->sisters_count = $_POST['sisters_count'];
+        $this->brothers_count = $_POST['brothers_count'];
+
+        // ************** Requirements ****************
+        
+        $this->req_age = $_POST['req_age'];
+        $this->req_cast = $_POST['req_cast'];
+        $this->req_height = $_POST['req_height'];
+        $this->req_status = $_POST['req_status'];
+        $this->req_income = $_POST['req_income'];
+        $this->req_maslak = $_POST['req_maslak'];
+        $this->req_education = $_POST['req_education'];
+        $this->req_area = $_POST['req_area'];
 
         // image stuff
         $this->image = $_FILES['image'];
@@ -55,12 +116,12 @@ class clientModel
     {
         global $db;
 
-        $sql = 'SELECT * FROM clients WHERE matchmaker_id = :matchmaker_id AND first_name = :first_name AND last_name = :last_name AND dob = :dob';
+        $sql = 'SELECT * FROM clients WHERE matchmaker_id = :matchmaker_id AND name = :name AND cnic = :cnic AND age = :age';
         $params = [
             ':matchmaker_id' => $this->matchmaker_id,
-            ':first_name' => $this->first_name,
-            ':last_name' => $this->last_name,
-            ':dob' => $this->dob,
+            ':name' => $this->name,
+            ':cnic' => $this->cnic,
+            ':age' => $this->age,
         ];
 
         $stmt = $db->executePreparedStatement($sql, $params);
@@ -122,7 +183,7 @@ class clientModel
         global $db;
 
         if (move_uploaded_file($this->img_tmp_name, __DIR__ . "/../" . ($this->targetFile))) {
-            $sql = "INSERT INTO clients (matchmaker_id, gender, first_name, last_name, dob, photo_path, education, occupation, contact, location, description) VALUES (:matchmaker_id, :gender, :first_name, :last_name, :dob, :photo_path, :education, :occupation, :contact, :location, :description)";
+            $sql = "INSERT INTO clients (matchmaker_id, gender, first_name, last_name, age, photo_path, education, occupation, contact, location, description) VALUES (:matchmaker_id, :gender, :first_name, :last_name, :age, :photo_path, :education, :occupation, :contact, :location, :description)";
 
             $params = [
                 // match parameters to values
@@ -130,7 +191,7 @@ class clientModel
                 ':gender' => $this->gender,
                 ':first_name' => $this->first_name,
                 ':last_name' => $this->last_name,
-                ':dob' => $this->dob,
+                ':age' => $this->age,
                 ':photo_path' => $this->targetFile,
                 ':education' => $this->education,
                 ':occupation' => $this->address,
@@ -190,12 +251,12 @@ function getIncrementId()
 // {
 //     global $db;
 
-//     $sql = 'SELECT * FROM clients WHERE matchmaker_id = :matchmaker_id AND first_name = :first_name AND last_name = :last_name AND dob = :dob';
+//     $sql = 'SELECT * FROM clients WHERE matchmaker_id = :matchmaker_id AND first_name = :first_name AND last_name = :last_name AND age = :age';
 //     $params = [
 //         ':matchmaker_id' => $matchmaker_id,
 //         ':first_name' => $first_name,
 //         ':last_name' => $last_name,
-//         ':dob' => $DOB,
+//         ':age' => $DOB,
 //     ];
 
 //     $stmt = $db->executePreparedStatement($sql, $params);
@@ -315,7 +376,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // If everything is ok, try to upload file
     // if (move_uploaded_file($_FILES["image"]["tmp_name"], __DIR__ . "/../" . $targetFile)) {
-    //     $sql = "INSERT INTO clients (matchmaker_id, gender, first_name, last_name, dob, photo_path, education, occupation, contact, location, description) VALUES (:matchmaker_id, :gender, :first_name, :last_name, :dob, :photo_path, :education, :occupation, :contact, :location, :description)";
+    //     $sql = "INSERT INTO clients (matchmaker_id, gender, first_name, last_name, age, photo_path, education, occupation, contact, location, description) VALUES (:matchmaker_id, :gender, :first_name, :last_name, :age, :photo_path, :education, :occupation, :contact, :location, :description)";
 
     //     $params = [
     //         // match parameters to values
@@ -323,7 +384,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //         ':gender' => $gender,
     //         ':first_name' => $first_name,
     //         ':last_name' => $last_name,
-    //         ':dob' => $DOB,
+    //         ':age' => $DOB,
     //         ':photo_path' => $targetFile,
     //         ':education' => $education,
     //         ':occupation' => $address,

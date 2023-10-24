@@ -22,250 +22,446 @@ include(__DIR__ . '/navbar.php');
     /* div {
         outline: 1px solid red;
     } */
+
+    select option {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100px;
+    }
 </style>
 
 <div class="container">
     <main>
         <div class="text-center">
-            <h2>Add New Client</h2>
-            <small>All fields are required</small>
+            <p class="fs-3">
+                Add New Client <small>(<strong style="color: red;">*</strong> are required fields)</small>
+            </p>
             <div class="mb-3"></div>
+            <hr>
         </div>
         <div class="row g-5">
-            <form id="client_form">
+            <form id="client_form" method="POST">
                 <div class="d-flex justify-content-center">
-                    <div class="col-md-7 col-lg-8">
-                        <div class="row g-3">
-                            <div class="alert alert-danger alert-dismissible d-none fade show" id="error_alert"
-                                role="alert">
-                                <div id="errorList"></div>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="col-sm-3">
-                                <label for="first_name" class="form-label">First name</label>
-                                <input type="text" class="form-control" id="first_name" placeholder="" value=""
-                                    maxlength="50" minlength="3">
-                            </div>
-
-                            <div class="col-sm-3">
-                                <label for="last_name" class="form-label">Last name</label>
-                                <input type="text" class="form-control" id="last_name" placeholder="" value=""
-                                    maxlength="50" minlength="3">
-                            </div>
-
-                            <div class="col-3">
-                                <label for="dob" class="form-label">Date of Birth</label>
-                                <input type="date" class="form-control" id="dob" placeholder="" value="">
-                            </div>
-
-                            <div class="col-3">
-                                <label for="gender" class="form-label">Gender</label>
-                                <select name="gender" id="gender" class="form-control">
-                                    <option value="" disabled selected>Select an option</option>
-                                    <option value="female">Female</option>
-                                    <option value="male">Male</option>
-                                </select>
-                            </div>
-
-                            <div class="col-6">
-                                <label for="education" class="form-label">Education</label>
-                                <input type="text" class="form-control" id="education" maxlength="100" minlength="3"
-                                    value="" placeholder="">
-                            </div>
-
-                            <div class="col-6">
-                                <label for="address" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="address" value="" placeholder="1234 Main St"
-                                    maxlength="100" minlength="3">
-                            </div>
-
-                            <div class="col-3">
-                                <label for="occupation" class="form-label">Occupation</label>
-                                <input type="text" class="form-control" id="occupation" value="" placeholder=""
-                                    maxlength="100" minlength="3">
-                            </div>
-
-                            <div class="col-3">
-                                <label for="contact" class="form-label">Contact Number</label>
-                                <input type="number" class="form-control" id="contact" value="" placeholder="">
-                            </div>
-
-                            <div class="col-6">
-                                <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" name="description" id="description" cols="90" rows="1"
-                                    maxlength="400" minlength="5"></textarea>
-                            </div>
+                    <div class="col-sm-9 col-md-7 col-lg-9">
+                        <div class="alert alert-danger alert-dismissible d-none fade show" id="error_alert"
+                            role="alert">
+                            <div id="errorList"></div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                        <hr class="my-4">
-                        <div class="row">
-                            <div class="col-3">
-                                <input type="file" id="image" name="image" accept="image/*">
+                        <div class="container">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <div class="section text-center">
+                                        <p class="fs-4">Personal details</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="gender" class="form-label"><strong style="color: red;">*</strong>
+                                        Gender</label>
+                                    <select name="gender" id="gender" class="form-control">
+                                        <option value="" disabled selected>Select an option</option>
+                                        <option value="female">Female</option>
+                                        <option value="male">Male</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="name" class="form-label"><strong style="color: red;">*
+                                        </strong>Name</label>
+                                    <input type="text" class="form-control" name="name" id="name" placeholder=""
+                                        value="faraz" minlength="3" maxlength="50">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="age" class="form-label"><strong style="color: red;">*
+                                        </strong>Age</label>
+                                    <select name="age" size="1" id="age" class="form-control">
+                                        <option value="" disabled selected>Select an option</option>
+                                        <?php for ($i = 18; $i <= 70; $i++) {
+                                            echo "<option value='$i'>$i</option>";
+                                        } ?>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="height" class="form-label"><strong style="color: red;">*
+                                        </strong>Height(cm)</label>
+                                    <input type="number" class="form-control" id="height" name="height" value="172"
+                                        placeholder="" min="3" max="500" minlength="1" maxlength="3">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="cnic" class="form-label"><strong style="color: red;">*
+                                        </strong>CNIC#</label>
+                                    <input type="text" class="form-control" id="cnic" placeholder="" name="cnic"
+                                        value="1231231231231" maxlength="15" minlength="15">
+                                </div>
+
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="cast" class="form-label"><strong style="color: red;">*
+                                        </strong>Cast</label>
+                                    <input type="text" class="form-control" id="cast" value="Caste" name="cast"
+                                        placeholder="" maxlength="255" minlength="3">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="maslak" class="form-label"><strong style="color: red;">*
+                                        </strong>Maslak</label>
+                                    <input type="text" class="form-control" id="maslak" value="Maslak" name="maslak"
+                                        placeholder="" maxlength="255" minlength="3">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="Complexion" class="form-label"><strong style="color: red;">*
+                                        </strong>Complexion</label>
+                                    <input type="text" class="form-control" id="Complexion" value="Complexion"
+                                        name="complexion" placeholder="" maxlength="255" minlength="3">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="marital_status" class="form-label"><strong style="color: red;">*
+                                        </strong>Marital Status</label>
+                                    <select name="marital_status" id="marital_status" class="form-control">
+                                        <option value="" disabled selected>Select an option</option>
+                                        <option value="Single">Single / Never married</option>
+                                        <option value="Nikkah Break">Nikkah Break</option>
+                                        <option value="Separated">Separated</option>
+                                        <option value="Widowed">Widowed</option>
+                                        <option value="Divorced">Divorced</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="reason_for_divorce" class="form-label">Divorce reason</label>
+                                    <textarea class="form-control" name="reason_for_divorce" id="reason_for_divorce"
+                                        cols="90" rows="1" maxlength="255"></textarea>
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="children" class="form-label"><strong style="color: red;">* </strong># of
+                                        children</label>
+                                    <input type="number" class="form-control" id="children" name="children" value="0"
+                                        placeholder="" min="0" max="15">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="education" class="form-label"><strong style="color: red;">*
+                                        </strong>Education</label>
+                                    <input type="text" class="form-control" id="education" name="education" value="BS"
+                                        placeholder="" maxlength="255" minlength="3">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="job" class="form-label">Job</label>
+                                    <input type="text" class="form-control" id="job" value="" name="job" placeholder=""
+                                        maxlength="255" minlength="3">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="business" class="form-label">Business</label>
+                                    <input type="text" class="form-control" id="business" value="" name="business"
+                                        placeholder="" maxlength="255" minlength="3">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="income" class="form-label">Income</label>
+                                    <input type="number" class="form-control" id="income" value="" name="income"
+                                        placeholder="" step="0.01">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="mother_tongue" class="form-label">Mother Tongue</label>
+                                    <input type="text" class="form-control" id="mother_tongue" value=""
+                                        name="mother_tongue" placeholder="" maxlength="255">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="belongs" class="form-label">Belongs to</label>
+                                    <input type="text" class="form-control" id="belongs" value="" name="belongs"
+                                        placeholder="" maxlength="255">
+                                </div>
+
+                                <hr>
+
+                                <div class="col-12">
+                                    <div class="section text-center">
+                                        <p class="fs-4">Residence details</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="country" class="form-label">Country</label>
+                                    <input type="text" class="form-control" id="country" value="" name="country"
+                                        placeholder="" maxlength="255">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="province" class="form-label">Province</label>
+                                    <input type="text" class="form-control" id="province" value="" name="province"
+                                        placeholder="" maxlength="255">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="city" class="form-label">City</label>
+                                    <input type="text" class="form-control" id="city" value="" name="city"
+                                        placeholder="" maxlength="255">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="area" class="form-label">Area</label>
+                                    <input type="text" class="form-control" id="area" value="" name="area"
+                                        placeholder="" maxlength="255">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="family_status" class="form-label">Family Status</label>
+                                    <input type="text" class="form-control" id="family_status" value=""
+                                        name="family_status" placeholder="" maxlength="255" minlength="3">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="full_address" class="form-label">Full Address</label>
+                                    <input type="text" class="form-control" id="full_address" value=""
+                                        name="full_address" placeholder="" maxlength="255" minlength="3">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="home_type" class="form-label">Home Type</label>
+                                    <input type="text" class="form-control" id="home_type" value="" name="home_type"
+                                        placeholder="" maxlength="255" minlength="3">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="home_size" class="form-label">Home size (in yards)</label>
+                                    <input type="number" class="form-control" id="home_size" value="" name="home_size"
+                                        placeholder="" min="0" max="50000">
+                                </div>
+                                <hr>
+                                <div class="col-12">
+                                    <div class="section text-center">
+                                        <p class="fs-4">Family details</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="father" class="form-label">Father</label>
+                                    <input type="text" class="form-control" id="father" value="" name="father"
+                                        placeholder="" maxlength="255">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="mother" class="form-label">Mother</label>
+                                    <input type="text" class="form-control" id="mother" value="" placeholder=""
+                                        name="mother" maxlength="255">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="brothers" class="form-label">Brothers</label>
+                                    <input type="number" class="form-control" id="brothers" value="" placeholder=""
+                                        name="brothers">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="sisters" class="form-label">Sisters</label>
+                                    <input type="number" class="form-control" id="sisters" value="" placeholder=""
+                                        name="sisters">
+                                </div>
+                                <hr>
+                                <div class="col-12">
+                                    <div class="section text-center">
+                                        <p class="fs-4">Requirements</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="req_age" class="form-label"><strong style="color: red;">*</strong>
+                                        Age</label>
+                                    <input type="number" class="form-control" id="req_age" value="" placeholder=""
+                                        name="req_age">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="req_cast" class="form-label"><strong style="color: red;">*</strong>
+                                        Cast</label>
+                                    <input type="text" class="form-control" id="req_cast" value="" placeholder=""
+                                        name="req_cast" maxlength="255" minlength="3">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="req_maslak" class="form-label"><strong style="color: red;">*</strong>
+                                        Maslak</label>
+                                    <input type="text" class="form-control" id="req_maslak" value="" placeholder=""
+                                        name="req_maslak" maxlength="255" minlength="3">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="req_height" class="form-label">Height</label>
+                                    <input type="number" class="form-control" id="req_height" value="" placeholder=""
+                                        name="req_height">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="req_family_status" class="form-label">Family Status</label>
+                                    <input type="text" class="form-control" id="req_family_status" value=""
+                                        name="req_family_status" placeholder="" maxlength="255" minlength="3">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="req_marital_status" class="form-label"><strong
+                                            style="color: red;">*</strong> Marital Status</label>
+                                    <input type="text" class="form-control" id="req_marital_status" value=""
+                                        name="req_marital_status" placeholder="" maxlength="255" minlength="3">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="req_education" class="form-label"><strong style="color: red;">*</strong>
+                                        Education</label>
+                                    <input type="text" class="form-control" id="req_education" value="" placeholder=""
+                                        name="req_education" maxlength="255" minlength="3">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="req_city" class="form-label"><strong style="color: red;">*</strong>
+                                        City</label>
+                                    <input type="text" class="form-control" id="req_city" value="" placeholder=""
+                                        name="req_city" maxlength="255" minlength="3">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="req_country" class="form-label"><strong style="color: red;">*</strong>
+                                        Country</label>
+                                    <input type="text" class="form-control" id="req_country" value="" placeholder=""
+                                        name="req_country" maxlength="255" minlength="3">
+                                </div>
                             </div>
-                            <div class="col"></div>
-                            <div class="col-8">
-                                <img id="imagePreview" src="#" alt="Image Preview"
-                                    style="max-width: 100px; display: none;">
+                            <hr class="my-4">
+                            <div class="row text-center">
+                                <p class="fs-4">Select image(s) of client</p>
+                                <div class="col-sm-12 col-md-3 mb-5 text-center">
+                                    <input type="file" id="image" name="image" accept="image/*" multiple>
+                                </div>
+                                <br>
+                                <div class="col-sm-12 col-md-9">
+                                    <div id="imagePreview"></div>
+                                </div>
                             </div>
+                            <hr class="my-4">
+                            <button class="w-100 btn btn-primary btn-lg" id="form_submit" type="submit">Add</button>
                         </div>
-                        <hr class="my-4">
-                        <button class="w-100 btn btn-primary btn-lg" id="form_submit" type="submit">Add</button>
                     </div>
                 </div>
             </form>
         </div>
     </main>
 
-    <footer class="my-5">
-
-    </footer>
+    <footer class="my-5"></footer>
 </div>
 
 <?php include(__DIR__ . '/../includes/footer.php'); ?>
 
 <script>
     document.getElementById('image').addEventListener('change', function () {
-        const file = this.files[0];
-        const reader = new FileReader();
+        const imagePreview = document.getElementById('imagePreview');
+        imagePreview.innerHTML = '';
 
-        reader.onload = function () {
-            const imagePreview = document.getElementById('imagePreview');
-            imagePreview.src = reader.result;
-            imagePreview.style.display = 'block';
+        for (let i = 0; i < this.files.length; i++) {
+            const file = this.files[i];
+            const reader = new FileReader();
+
+            reader.onload = function () {
+                const img = document.createElement('img');
+                img.src = reader.result;
+                img.style.maxWidth = '200px';
+                img.style.marginRight = '5px';
+                imagePreview.appendChild(img);
+            }
+
+            reader.readAsDataURL(file);
         }
-
-        reader.readAsDataURL(file);
     });
 
-    const clearPage = () => {
-        // Reset input fields
-        $('#client_form')[0].reset();
-
-        // Reset image preview
-        $('#imagePreview').attr('src', '').hide();
-
-        // Reset file input (optional)
+    function clearForm() {
+        $('#client_form')[0].reset();   // clears form data
+        $('#imagePreview').attr('src', '').hide(); // clears image preview
         $('#image').val('');
+        $('#error_alert').hide();   // hides error alert
+        $('#errorList').empty();    // clears error list
     }
 
-    // Function to validate the client form
     function validateClientForm() {
-        let errorList = document.getElementById("errorList");
-        // .classList.remove("d-none");
+        console.log("Inside validation of form");
+        const errorList = [];
+        const requiredFields = ['name', 'age', 'gender', 'cnic', 'cast', 'maslak', 'marital_status', 'education', 'req_age', 'req_cast', 'req_maslak', 'req_marital_status', 'req_education', 'req_city', 'req_country'];
 
-        console.log("Validating client form");
-        errorList.value = "";
+        requiredFields.forEach(function (field) {
+            const input = document.getElementById(field);
+            if (!input.value.trim()) {
 
-        const firstName = $("#first_name").val();
-        const lastName = $("#last_name").val();
-        const dob = $("#dob").val();
-        const education = $("#education").val();
-        const address = $("#address").val();
-        const occupation = $("#occupation").val();
-        const contact = $("#contact").val();
+                let splitField = field.split('_');
+                console.log("Split fields:" + splitField);
 
-        const currentDate = new Date();
-        const selectedDate = new Date(dob);
+                if (splitField[0] === 'req') {
+                    splitField[0] = 'Requirement';
+                }
 
-        // Regular expressions for validation
-        const nameRegex = /^[a-zA-Z\s]+$/;
-        const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-        const contactRegex = /^\d{11}$/;
+                splitField.forEach((element, index) => {
+                    splitField[index] = element.charAt(0).toUpperCase() + element.slice(1);
+                });
 
-        // Validation flags
-        let isValid = true;
+                splitField = splitField.join(' ');
 
-        // Validate first name
-        if (!nameRegex.test(firstName) || firstName.length < 3) {
-            isValid = false;
-            errorList.innerHTML += "Please enter a valid first name (at least 3 characters, alphabets only)." + "<br>";
+
+                errorList.push(splitField + ' is required.');
+
+                input.classList.add('is-invalid');
+            } else {
+                input.classList.remove('is-invalid');
+            }
+        });
+
+        const cnicInput = document.getElementById('cnic');
+        if (!/^\d{13}$/.test(cnicInput.value.trim())) {
+            errorList.push('CNIC must be exactly 13 digits.');
+            cnicInput.classList.add('is-invalid');
+        } else {
+            cnicInput.classList.remove('is-invalid');
         }
 
-        // Validate last name
-        if (!nameRegex.test(lastName) || lastName.length < 3) {
-            isValid = false;
-            errorList.innerHTML += "Please enter a valid last name (at least 3 characters, alphabets only)." + "<br>";
+        const incomeInput = document.getElementById('income');
+        if (incomeInput.value.trim() && isNaN(Number(incomeInput.value.trim()))) {
+            errorList.push('Income must be a valid number.');
+            incomeInput.classList.add('is-invalid');
+        } else {
+            incomeInput.classList.remove('is-invalid');
         }
 
-        // Validate date of birth
-        if (!dateRegex.test(dob)) {
-            isValid = false;
-            errorList.innerHTML += "Please enter a valid date of birth (YYYY-MM-DD format)." + "<br>";
-        }
+        let errorAlert = document.getElementById('error_alert');
+        let errorListContainer = document.getElementById('errorList');
 
-        if (!contactRegex.test(contact)) {
-            isValid = false;
-            errorList.innerHTML += "Please enter a valid contact number (11 digits)." + "<br>";
+        if (errorList.length > 0) {
+            errorListContainer.innerHTML = '';
+            errorList.forEach(function (error) {
+                errorListContainer.innerHTML += '<div>' + error + '</div>';
+            });
+            errorAlert.classList.remove('d-none');
+            return false;
+        } else {
+            errorAlert.classList.add('d-none');
+            return true;
         }
-
-        if (!education || education.length < 3) {
-            console.log("education: ", education);
-            console.log("education len: ", education.length);
-            isValid = false;
-            errorList.innerHTML += "Please enter a valid education (at least 3 characters)." + "<br>";
-        }
-
-        if (!address || address.length < 3) {
-            isValid = false;
-            errorList.innerHTML += "Please enter a valid address (at least 3 characters)." + "<br>";
-        }
-
-        if (!occupation || occupation.length < 3) {
-            isValid = false;
-            errorList.innerHTML += "Please enter a valid occupation (at least 3 characters)." + "<br>";
-        }
-
-        if (selectedDate >= currentDate) {
-            isValid = false;
-            errorList.innerHTML += 'Please select a date before the current date.' + "<br>";
-        }
-
-        if (!isValid) {
-            document.getElementById('error_alert').classList.remove("d-none");
-        }
-
-        return isValid;
     }
 
     document.getElementById('client_form').addEventListener('submit', function (event) {
+        event.preventDefault();
         if (!validateClientForm()) {
             console.log("Form validation failed");
-            event.preventDefault();
         } else {
             console.log("Submitting form");
-            event.preventDefault();
-
-            const image = $('#image');
-            const image_data = image.prop('files')[0]; //gets the image, [1] is the length
-
-            const first_name = $('#first_name').val();
-            const last_name = $('#last_name').val();
-
-            let DOB = new Date($('#dob').val());
-            const day = DOB.getDate();
-            const month = DOB.getMonth() + 1;
-            const year = DOB.getFullYear();
-            DOB = [year, month, day].join('-');
-
-            const gender = $('#gender').val();
-            const education = $('#education').val();
-            const occupation = $('#occupation').val();
-            const address = $('#address').val();
-            const contact = $('#contact').val();
-            const description = $('#description').val();
-
-            const formData = new FormData();
-            formData.append('first_name', first_name);
-            formData.append('last_name', last_name);
-            formData.append('DOB', DOB);
-            formData.append('gender', gender);
-            formData.append('education', education);
-            formData.append('occupation', occupation);
-            formData.append('address', address);
-            formData.append('contact', contact);
-            formData.append('description', description);
-            formData.append('image', image_data);
-
+            const formData = new FormData(this); // Get form data
+            
             $.ajax({
                 url: "process_form.php",
                 type: "POST",
@@ -274,20 +470,20 @@ include(__DIR__ . '/navbar.php');
                 cache: false,
                 processData: false,
                 success: function (data) {
-                    if (data == "success") {
+                    if (data === "success") {
                         alert('Record added successfully');
-                    } else if (data == "fakeImgError") {
+                    } else if (data === "fakeImgError") {
                         alert("Image uploaded is fake");
-                    } else if (data == "existingRecord") {
+                    } else if (data === "existingRecord") {
                         alert('Client already exists');
-                    } else if (data == "fileError") {
+                    } else if (data === "fileError") {
                         alert("Error uploading file");
-                    } else if (data == "extError") {
+                    } else if (data === "extError") {
                         alert('File image format other than jpg, jpeg, png, gif not allowed');
-                    } else if (data == "sizeError") {
+                    } else if (data === "sizeError") {
                         alert('File size larger than 5MB not allowed');
                     }
-                    clearPage();
+                    clearForm(); // Clear the form after submission
                 },
                 error: function (e) {
                     alert(e);

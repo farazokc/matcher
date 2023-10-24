@@ -12,7 +12,7 @@ include('includes/database.php');
 if (isset($_SESSION['users_email']) || isset($_SESSION['users_id'])) {
 	$email = $_SESSION['users_email'];
 
-	$sql = "SELECT id, email, is_admin from users where email = :email";
+	$sql = "SELECT id, email, status from users where email = :email";
 	$params = [
 		':email' => $email,
 	];

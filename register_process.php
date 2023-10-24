@@ -23,12 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $type = 'user';
     $type_val = 0;
 
-    $sql = "INSERT INTO users (email, password, is_admin) VALUES (:email, :password, :is_admin)";
+    $sql = "INSERT INTO users (email, password, status) VALUES (:email, :password, :status)";
 
     $params = [
         ':email' => $email,
         ':password' => $password,
-        ':is_admin' => $type_val,
+        ':status' => $type_val,
     ];
 
     try {
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // USERS ID SET HO GYI HAI
         $_SESSION['users_id'] = $row['user_id'];
         $_SESSION['users_type'] = $type;
-        $_SESSION['users_is_admin'] = $type_val;
+        $_SESSION['users_status'] = $type_val;
         $_SESSION['users_email'] = $row['email'];
 
         // echo "SESSION Dump in register_process: <br>";

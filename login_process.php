@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($row && $password == $row['password']) {
 
         //redirect to matchmaker dashboard
-        if($type == 'user' && $row['is_admin'] == 0){
+        if($type == 'user' && $row['status'] == 0){
             $message = "user";
             // if user is a matchmaker, get matchmaker's info
             $mm_sql = "SELECT * FROM matchmakers WHERE user_id = :user_id";
@@ -35,19 +35,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
         //redirect to pending admin dashboard
-        } else if ($type == 'admin' && $row['is_admin'] == 1) {
+        } else if ($type == 'admin' && $row['status'] == 1) {
             $message = "pending";
 
 
         //redirect to admin dashboard
-        } else if ($type == 'admin' && $row['is_admin'] == 2) {
+        } else if ($type == 'admin' && $row['status'] == 2) {
             $message = "admin";
         }
 
         //users_id mein id from 
         $_SESSION['users_id'] = $row['id'];
         $_SESSION['users_type'] = $type;
-        $_SESSION['users_is_admin'] = $row['is_admin'];
+        $_SESSION['users_status'] = $row['status'];
         $_SESSION['users_email'] = $row['email'];
 
         $response = array(
