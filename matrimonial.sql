@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 22, 2023 at 12:12 AM
+-- Generation Time: Oct 29, 2023 at 11:05 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -30,26 +30,55 @@ SET time_zone = "+00:00";
 CREATE TABLE `clients` (
   `id` int(11) NOT NULL,
   `matchmaker_id` int(11) DEFAULT NULL,
-  `gender` enum('male','female') DEFAULT NULL,
-  `first_name` varchar(50) DEFAULT NULL,
-  `last_name` varchar(50) DEFAULT NULL,
-  `dob` date DEFAULT NULL,
-  `photo_path` varchar(255) DEFAULT NULL,
-  `education` varchar(100) DEFAULT NULL,
-  `occupation` varchar(100) DEFAULT NULL,
-  `contact` varchar(11) DEFAULT NULL,
-  `location` varchar(100) DEFAULT NULL,
-  `description` text DEFAULT NULL
+  `gender` enum('Male','Female') NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `age` int(2) NOT NULL,
+  `height` decimal(5,2) NOT NULL,
+  `cnic` varchar(13) NOT NULL,
+  `cast` varchar(255) NOT NULL,
+  `maslak` varchar(255) NOT NULL,
+  `complexion` varchar(50) DEFAULT NULL,
+  `marital_status` enum('Single','Nikkah Break','Separated','Widowed','Divorced') CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
+  `div_reason` varchar(255) DEFAULT NULL,
+  `children` int(11) DEFAULT 0,
+  `education` varchar(255) NOT NULL,
+  `job` varchar(255) DEFAULT NULL,
+  `business` varchar(255) DEFAULT NULL,
+  `income` decimal(10,2) DEFAULT NULL,
+  `mother_tongue` varchar(255) DEFAULT NULL,
+  `belongs` varchar(255) DEFAULT NULL,
+  `photo_path` varchar(255) NOT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `province` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `area` varchar(255) DEFAULT NULL,
+  `family_status` varchar(255) DEFAULT NULL,
+  `full_address` text NOT NULL,
+  `home_type` varchar(255) DEFAULT NULL,
+  `home_size` varchar(255) DEFAULT NULL,
+  `father` varchar(255) DEFAULT NULL,
+  `mother` varchar(255) DEFAULT NULL,
+  `brothers` varchar(255) DEFAULT NULL,
+  `sisters` varchar(255) DEFAULT NULL,
+  `req_age` int(11) DEFAULT NULL,
+  `req_cast` varchar(255) DEFAULT NULL,
+  `req_maslak` varchar(255) DEFAULT NULL,
+  `req_height` decimal(5,2) DEFAULT NULL,
+  `req_family_status` varchar(255) DEFAULT NULL,
+  `req_marital_status` varchar(255) DEFAULT NULL,
+  `req_education` varchar(255) DEFAULT NULL,
+  `req_city` varchar(255) DEFAULT NULL,
+  `req_country` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `clients`
 --
 
-INSERT INTO `clients` (`id`, `matchmaker_id`, `gender`, `first_name`, `last_name`, `dob`, `photo_path`, `education`, `occupation`, `contact`, `location`, `description`) VALUES
-(26, 23, 'male', 'faraz', 'naeem', '2023-10-21', 'images\\26.jpeg', 'HSSC', 'Block 10-A Gulshan-e-Iqbal', '03123456789', 'Block 10-A Gulshan-e-Iqbal', 'Faraz Naeem'),
-(27, 23, 'male', 'sample', 'person', '2023-10-17', 'images\\27.jpg', 'SSC', '1234 Line', '03123456789', '1234 Line', 'Sample Record'),
-(28, 24, 'male', 'simple', 'person', '2023-10-04', 'images\\28.jpg', 'HSSC', '231 Address', '03212456789', '231 Address', 'Simple person');
+INSERT INTO `clients` (`id`, `matchmaker_id`, `gender`, `name`, `age`, `height`, `cnic`, `cast`, `maslak`, `complexion`, `marital_status`, `div_reason`, `children`, `education`, `job`, `business`, `income`, `mother_tongue`, `belongs`, `photo_path`, `country`, `province`, `city`, `area`, `family_status`, `full_address`, `home_type`, `home_size`, `father`, `mother`, `brothers`, `sisters`, `req_age`, `req_cast`, `req_maslak`, `req_height`, `req_family_status`, `req_marital_status`, `req_education`, `req_city`, `req_country`) VALUES
+(7, 25, 'Male', 'umair hashmi', 22, 180.00, '4220112345671', 'Hashmi', 'Muslim', 'Fair', 'Single', '', 0, 'BS Computer Science', 'Software Engineer', '', 180000.00, 'Urdu', 'Pakistan', 'images\\7.jpg', 'Pakistan', 'Sindh', 'Karachi', 'Gulsha-e-Iqbal', '', '', '', '', '', '', '', '', 23, 'Hashmi', 'Muslim', 0.00, '', 'Single', 'Bachelor\'s', 'Karachi', 'Pakistan'),
+(8, 24, 'Male', 'tariq daniyal', 23, 186.00, '4220123456781', 'Jutt', 'Muslim', 'Fair', 'Single', '', 0, 'BS Computer Science', '', 'Freelance', 200000.00, 'Urdu', 'Pakistan', 'images\\8.jfif', '', '', '', '', '', '', '', '', '', '', '', '', 20, 'Jutt', 'Muslim', 0.00, '', 'Single ', 'Bachelor\'s', 'Karachi', 'Pakistan'),
+(9, 23, 'Male', 'faraz naeem piracha', 20, 175.00, '4220112312312', 'Piracha', 'Muslim', 'Fair', 'Single', '', 0, 'BS Software Engineering', 'Student', 'Freelance', 0.00, 'Urdu', 'Pakistan', 'images\\9.jpeg', '', '', '', '', '', '', '', '', '', '', '', '', 20, 'Any', 'Muslim', 0.00, '', 'Single', 'Bachelor\'s', 'Karachi', 'Pakistan');
 
 -- --------------------------------------------------------
 
@@ -85,18 +114,18 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `is_admin` tinyint(1) DEFAULT 0
+  `status` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `is_admin`) VALUES
+INSERT INTO `users` (`id`, `email`, `password`, `status`) VALUES
 (37, 'admin@gmail.com', 'admin_password', 2),
-(58, 'faraz@gmail.com', 'pass', 0),
-(59, 'jahiz.ahmed@gmail.com', 'password', 0),
-(60, 'ateeq.ahmad@gmail.com', 'ateeqahmad', 0);
+(58, 'faraz@gmail.com', 'pass', 1),
+(59, 'jahiz.ahmed@gmail.com', 'password', 1),
+(60, 'ateeq.ahmad@gmail.com', 'ateeqahmad', 1);
 
 --
 -- Indexes for dumped tables
@@ -107,6 +136,7 @@ INSERT INTO `users` (`id`, `email`, `password`, `is_admin`) VALUES
 --
 ALTER TABLE `clients`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `cnic` (`cnic`),
   ADD KEY `matchmaker_id` (`matchmaker_id`);
 
 --
@@ -131,19 +161,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `matchmakers`
 --
 ALTER TABLE `matchmakers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- Constraints for dumped tables
@@ -153,7 +183,7 @@ ALTER TABLE `users`
 -- Constraints for table `clients`
 --
 ALTER TABLE `clients`
-  ADD CONSTRAINT `clients_ibfk_1` FOREIGN KEY (`matchmaker_id`) REFERENCES `matchmakers` (`id`);
+  ADD CONSTRAINT `matchmaker_id_fk` FOREIGN KEY (`matchmaker_id`) REFERENCES `matchmakers` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `matchmakers`

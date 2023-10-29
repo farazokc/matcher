@@ -1,4 +1,4 @@
-<!-- matchmakers/dashboard.php -->
+matchmakers/dashboard.php
 <?php
 include(__DIR__ . '/../session.php');
 

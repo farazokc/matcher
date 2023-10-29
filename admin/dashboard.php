@@ -79,40 +79,7 @@ $result = $db->fetchAll($stmt);
         </div>
         <h2>Matchmaker Details</h2>
         <table class="table table-hover table-striped-columns table-responsive align-middle fs-6 text-center">
-            <!-- <thead>
-                <th>
-                    Image
-                </th>
-                <th>
-                    Added by
-                </th>
-                <th>
-                    Full Name
-                </th>
-                <th>
-                    DOB
-                </th>
-                <th>
-                    Gender
-                </th>
-                <th>
-                    Education
-                </th>
-                <th>
-                    Occupation
-                </th>
-                <th>
-                    Income
-                </th>
-                <th>
-                    Address
-                </th>
-                <th>
-                    Description
-                </th>
-            </thead> -->
             <thead>
-                <!-- id, email, status -->
                 <th>
                     ID
                 </th>
@@ -141,7 +108,9 @@ $result = $db->fetchAll($stmt);
                         </td>
                         <?php if ($row['status']) { ?>
                             <td>
-                                Active
+                                <strong>
+                                    Active
+                                </strong>
                             </td>
                             <td>
                                 <div>
@@ -174,7 +143,7 @@ $result = $db->fetchAll($stmt);
                                     <a class="edit-user text-light" style="text-decoration: none;"
                                         href="<?php echo "./edit_user.php?id=" . $row['id'] ?>">
                                         <button class="btn btn-info">
-                                            Edit
+                                            Edit Details
                                         </button>
                                     </a>
                                 </div>
@@ -182,7 +151,7 @@ $result = $db->fetchAll($stmt);
                                     <a class="delete-user text-light" style="text-decoration: none;"
                                         href="<?php echo "./delete_user.php?id=" . $row['id'] ?>">
                                         <button class="btn btn-danger">
-                                            Delete
+                                            Delete User
                                         </button>
                                     </a>
                                 </div>

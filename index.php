@@ -44,6 +44,9 @@ include('includes/header.php');
             <div class="redirect-link">
                 <p>Not a member? <a href="register.php">Register here!</a></p>
             </div>
+            <div class="forgot-password">
+                <p><a href="" onclick="pwdAlert()">Forgot your email/password?</a></p>
+            </div>
 
             <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
             <p class="mt-5 mb-3 text-body-secondary">&copy; MKAGI</p>
@@ -54,6 +57,10 @@ include('includes/header.php');
 <?php include('includes/footer.php'); ?>
 
 <script>
+    function pwdAlert(){
+        alert("Please contact the admin to reset your password.");
+    }
+
     async function login(event) {
         event.preventDefault();
 
