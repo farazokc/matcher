@@ -71,7 +71,7 @@ include(__DIR__ . '/navbar.php');
                                     <label for="name" class="form-label"><strong style="color: red;">*
                                         </strong>Name</label>
                                     <input type="text" class="form-control" name="name" id="name" placeholder=""
-                                        value="faraz" minlength="3" maxlength="50">
+                                        value="Name" minlength="3" maxlength="50">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
@@ -88,7 +88,7 @@ include(__DIR__ . '/navbar.php');
                                 <div class="col-sm-12 col-md-3">
                                     <label for="height" class="form-label"><strong style="color: red;">*
                                         </strong>Height(cm)</label>
-                                    <input type="number" class="form-control" id="height" name="height" value="172"
+                                    <input type="number" class="form-control" id="height" name="height" value="180"
                                         placeholder="" min="3" max="500" minlength="1" maxlength="3">
                                 </div>
 
@@ -96,7 +96,7 @@ include(__DIR__ . '/navbar.php');
                                     <label for="cnic" class="form-label"><strong style="color: red;">*
                                         </strong>CNIC#</label>
                                     <input type="text" class="form-control" id="cnic" placeholder="" name="cnic"
-                                        value="1231231231231" maxlength="15" minlength="15">
+                                        value="1231231231231" maxlength="13" minlength="13">
                                 </div>
 
 
@@ -135,9 +135,9 @@ include(__DIR__ . '/navbar.php');
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
-                                    <label for="reason_for_divorce" class="form-label">Divorce reason</label>
-                                    <textarea class="form-control" name="reason_for_divorce" id="reason_for_divorce"
-                                        cols="90" rows="1" maxlength="255"></textarea>
+                                    <label for="div_reason" class="form-label">Divorce reason</label>
+                                    <input type="text" class="form-control" name="div_reason" id="div_reason"
+                                        maxlength="255" />
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
@@ -156,31 +156,31 @@ include(__DIR__ . '/navbar.php');
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="job" class="form-label">Job</label>
-                                    <input type="text" class="form-control" id="job" value="" name="job" placeholder=""
-                                        maxlength="255" minlength="3">
-                                </div>
-
-                                <div class="col-sm-12 col-md-3">
-                                    <label for="business" class="form-label">Business</label>
-                                    <input type="text" class="form-control" id="business" value="" name="business"
+                                    <input type="text" class="form-control" id="job" value="job" name="job"
                                         placeholder="" maxlength="255" minlength="3">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
+                                    <label for="business" class="form-label">Business</label>
+                                    <input type="text" class="form-control" id="business" value="business"
+                                        name="business" placeholder="" maxlength="255" minlength="3">
+                                </div>
+
+                                <div class="col-sm-12 col-md-3">
                                     <label for="income" class="form-label">Income</label>
-                                    <input type="number" class="form-control" id="income" value="" name="income"
-                                        placeholder="" step="0.01">
+                                    <input type="number" class="form-control" id="income" value="1000000.5"
+                                        name="income" placeholder="" step="0.01">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="mother_tongue" class="form-label">Mother Tongue</label>
-                                    <input type="text" class="form-control" id="mother_tongue" value=""
+                                    <input type="text" class="form-control" id="mother_tongue" value="mother tongue"
                                         name="mother_tongue" placeholder="" maxlength="255">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="belongs" class="form-label">Belongs to</label>
-                                    <input type="text" class="form-control" id="belongs" value="" name="belongs"
+                                    <input type="text" class="form-control" id="belongs" value="Belongs" name="belongs"
                                         placeholder="" maxlength="255">
                                 </div>
 
@@ -194,50 +194,50 @@ include(__DIR__ . '/navbar.php');
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="country" class="form-label">Country</label>
-                                    <input type="text" class="form-control" id="country" value="" name="country"
+                                    <input type="text" class="form-control" id="country" value="Country" name="country"
                                         placeholder="" maxlength="255">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="province" class="form-label">Province</label>
-                                    <input type="text" class="form-control" id="province" value="" name="province"
-                                        placeholder="" maxlength="255">
+                                    <input type="text" class="form-control" id="province" value="Province"
+                                        name="province" placeholder="" maxlength="255">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="city" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="city" value="" name="city"
+                                    <input type="text" class="form-control" id="city" value="City" name="city"
                                         placeholder="" maxlength="255">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="area" class="form-label">Area</label>
-                                    <input type="text" class="form-control" id="area" value="" name="area"
+                                    <input type="text" class="form-control" id="area" value="Area" name="area"
                                         placeholder="" maxlength="255">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="family_status" class="form-label">Family Status</label>
-                                    <input type="text" class="form-control" id="family_status" value=""
+                                    <input type="text" class="form-control" id="family_status" value="family status"
                                         name="family_status" placeholder="" maxlength="255" minlength="3">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="full_address" class="form-label">Full Address</label>
-                                    <input type="text" class="form-control" id="full_address" value=""
+                                    <input type="text" class="form-control" id="full_address" value="full addrress"
                                         name="full_address" placeholder="" maxlength="255" minlength="3">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="home_type" class="form-label">Home Type</label>
-                                    <input type="text" class="form-control" id="home_type" value="" name="home_type"
-                                        placeholder="" maxlength="255" minlength="3">
+                                    <input type="text" class="form-control" id="home_type" value="banglow"
+                                        name="home_type" placeholder="" maxlength="255" minlength="3">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="home_size" class="form-label">Home size (in yards)</label>
-                                    <input type="number" class="form-control" id="home_size" value="" name="home_size"
-                                        placeholder="" min="0" max="50000">
+                                    <input type="number" class="form-control" id="home_size" value="120"
+                                        name="home_size" placeholder="" min="0" max="50000">
                                 </div>
                                 <hr>
                                 <div class="col-12">
@@ -248,25 +248,25 @@ include(__DIR__ . '/navbar.php');
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="father" class="form-label">Father</label>
-                                    <input type="text" class="form-control" id="father" value="" name="father"
-                                        placeholder="" maxlength="255">
+                                    <input type="text" class="form-control" id="father" value="Father name"
+                                        name="father" placeholder="" maxlength="255">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="mother" class="form-label">Mother</label>
-                                    <input type="text" class="form-control" id="mother" value="" placeholder=""
-                                        name="mother" maxlength="255">
+                                    <input type="text" class="form-control" id="mother" value="Mother name"
+                                        placeholder="" name="mother" maxlength="255">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="brothers" class="form-label">Brothers</label>
-                                    <input type="number" class="form-control" id="brothers" value="" placeholder=""
+                                    <input type="number" class="form-control" id="brothers" value="3" placeholder=""
                                         name="brothers">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="sisters" class="form-label">Sisters</label>
-                                    <input type="number" class="form-control" id="sisters" value="" placeholder=""
+                                    <input type="number" class="form-control" id="sisters" value="2" placeholder=""
                                         name="sisters">
                                 </div>
                                 <hr>
@@ -279,69 +279,70 @@ include(__DIR__ . '/navbar.php');
                                 <div class="col-sm-12 col-md-3">
                                     <label for="req_age" class="form-label"><strong style="color: red;">*</strong>
                                         Age</label>
-                                    <input type="number" class="form-control" id="req_age" value="" placeholder=""
+                                    <input type="number" class="form-control" id="req_age" value="23" placeholder=""
                                         name="req_age">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="req_cast" class="form-label"><strong style="color: red;">*</strong>
                                         Cast</label>
-                                    <input type="text" class="form-control" id="req_cast" value="" placeholder=""
+                                    <input type="text" class="form-control" id="req_cast" value="Casted" placeholder=""
                                         name="req_cast" maxlength="255" minlength="3">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="req_maslak" class="form-label"><strong style="color: red;">*</strong>
                                         Maslak</label>
-                                    <input type="text" class="form-control" id="req_maslak" value="" placeholder=""
-                                        name="req_maslak" maxlength="255" minlength="3">
+                                    <input type="text" class="form-control" id="req_maslak" value="Maslik"
+                                        placeholder="" name="req_maslak" maxlength="255" minlength="3">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="req_height" class="form-label">Height</label>
-                                    <input type="number" class="form-control" id="req_height" value="" placeholder=""
+                                    <input type="number" class="form-control" id="req_height" value="123" placeholder=""
                                         name="req_height">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="req_family_status" class="form-label">Family Status</label>
-                                    <input type="text" class="form-control" id="req_family_status" value=""
+                                    <input type="text" class="form-control" id="req_family_status" value="Status"
                                         name="req_family_status" placeholder="" maxlength="255" minlength="3">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="req_marital_status" class="form-label"><strong
                                             style="color: red;">*</strong> Marital Status</label>
-                                    <input type="text" class="form-control" id="req_marital_status" value=""
+                                    <input type="text" class="form-control" id="req_marital_status" value="status"
                                         name="req_marital_status" placeholder="" maxlength="255" minlength="3">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="req_education" class="form-label"><strong style="color: red;">*</strong>
                                         Education</label>
-                                    <input type="text" class="form-control" id="req_education" value="" placeholder=""
-                                        name="req_education" maxlength="255" minlength="3">
+                                    <input type="text" class="form-control" id="req_education" value="Req education"
+                                        placeholder="" name="req_education" maxlength="255" minlength="3">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="req_city" class="form-label"><strong style="color: red;">*</strong>
                                         City</label>
-                                    <input type="text" class="form-control" id="req_city" value="" placeholder=""
-                                        name="req_city" maxlength="255" minlength="3">
+                                    <input type="text" class="form-control" id="req_city" value="Req city"
+                                        placeholder="" name="req_city" maxlength="255" minlength="3">
                                 </div>
 
                                 <div class="col-sm-12 col-md-3">
                                     <label for="req_country" class="form-label"><strong style="color: red;">*</strong>
                                         Country</label>
-                                    <input type="text" class="form-control" id="req_country" value="" placeholder=""
-                                        name="req_country" maxlength="255" minlength="3">
+                                    <input type="text" class="form-control" id="req_country" value="Req country"
+                                        placeholder="" name="req_country" maxlength="255" minlength="3">
                                 </div>
                             </div>
                             <hr class="my-4">
                             <div class="row text-center">
-                                <p class="fs-4">Select image(s) of client</p>
+                                <p class="fs-4">Select image of client</p>
                                 <div class="col-sm-12 col-md-3 mb-5 text-center">
-                                    <input type="file" id="image" name="image" accept="image/*" multiple>
+                                    <input type="file" id="image" class="form-control" name="image" accept="image/*">
+                                    <!-- <input type="file" id="image" name="image" accept="image/*" multiple> -->
                                 </div>
                                 <br>
                                 <div class="col-sm-12 col-md-9">
@@ -394,12 +395,11 @@ include(__DIR__ . '/navbar.php');
     function validateClientForm() {
         console.log("Inside validation of form");
         const errorList = [];
-        const requiredFields = ['name', 'age', 'gender', 'cnic', 'cast', 'maslak', 'marital_status', 'education', 'req_age', 'req_cast', 'req_maslak', 'req_marital_status', 'req_education', 'req_city', 'req_country'];
+        const requiredFields = ['name', 'age', 'gender', 'cnic', 'cast', 'maslak', 'marital_status', 'education', 'req_age', 'req_cast', 'req_maslak', 'req_marital_status', 'req_education', 'req_city', 'req_country', 'image'];
 
         requiredFields.forEach(function (field) {
             const input = document.getElementById(field);
             if (!input.value.trim()) {
-
                 let splitField = field.split('_');
                 console.log("Split fields:" + splitField);
 
@@ -412,16 +412,14 @@ include(__DIR__ . '/navbar.php');
                 });
 
                 splitField = splitField.join(' ');
-
-
                 errorList.push(splitField + ' is required.');
-
                 input.classList.add('is-invalid');
             } else {
                 input.classList.remove('is-invalid');
             }
         });
 
+        // validate CNIC
         const cnicInput = document.getElementById('cnic');
         if (!/^\d{13}$/.test(cnicInput.value.trim())) {
             errorList.push('CNIC must be exactly 13 digits.');
@@ -430,13 +428,14 @@ include(__DIR__ . '/navbar.php');
             cnicInput.classList.remove('is-invalid');
         }
 
-        const incomeInput = document.getElementById('income');
-        if (incomeInput.value.trim() && isNaN(Number(incomeInput.value.trim()))) {
-            errorList.push('Income must be a valid number.');
-            incomeInput.classList.add('is-invalid');
-        } else {
-            incomeInput.classList.remove('is-invalid');
-        }
+
+        // const incomeInput = document.getElementById('income');
+        // if (incomeInput.value.trim() && isNaN(Number(incomeInput.value.trim()))) {
+        //     errorList.push('Income must be a valid number.');
+        //     incomeInput.classList.add('is-invalid');
+        // } else {
+        //     incomeInput.classList.remove('is-invalid');
+        // }
 
         let errorAlert = document.getElementById('error_alert');
         let errorListContainer = document.getElementById('errorList');
@@ -461,9 +460,9 @@ include(__DIR__ . '/navbar.php');
         } else {
             console.log("Submitting form");
             const formData = new FormData(this); // Get form data
-            
+
             $.ajax({
-                url: "process_form.php",
+                url: "add_form.php",
                 type: "POST",
                 data: formData,
                 contentType: false,

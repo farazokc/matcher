@@ -86,7 +86,8 @@ include('includes/header.php');
             } else if (data.success && data.message == "user") {
                 window.location.href = './matchmakers/view_all.php';
             } else if (data.success && data.message == "pending") {
-                window.location.href = './admin/pending.php';
+                // window.location.href = './matchmakers/pending.php';
+                alert("Your account is still pending approval. Please wait for the admin to approve your account.");
             } else if (data.success && data.message == "admin") {
                 window.location.href = './admin/dashboard.php';
             }

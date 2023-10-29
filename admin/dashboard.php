@@ -13,35 +13,44 @@ include(__DIR__ . '/../includes/header.php');
 include(__DIR__ . '/navbar.php');
 
 global $db;
+// Show table listing all users of system
 
-$sql = "SELECT * FROM clients";
-$params = [];
+$sql = "SELECT * FROM users where `status` != 2 ORDER BY `status` ASC";
+$params = [
+    // ':status' => 2
+];
 
 $stmt = $db->executePreparedStatement($sql, $params);
+$result = $db->fetchAll($stmt);
 
-if ($stmt->rowCount() == 0) {
-    $records = [];
-} else {
-    $records = $db->fetchAll($stmt);
-}
+// // $sql = "SELECT * FROM clients";
+// // $params = [];
 
-// get the matchmaker's name for each client
-foreach ($records as $key => $record) {
-    $sql = "SELECT first_name, last_name FROM matchmakers WHERE id = :id";
+// // $stmt = $db->executePreparedStatement($sql, $params);
 
-    $params = [
-        ':id' => $record['matchmaker_id']
-    ];
+// // if ($stmt->rowCount() == 0) {
+// //     $records = [];
+// // } else {
+// //     $records = $db->fetchAll($stmt);
+// // }
 
-    $stmt = $db->executePreparedStatement($sql, $params);
+// // get the matchmaker's name for each client
+// foreach ($records as $key => $record) {
+//     $sql = "SELECT first_name, last_name FROM matchmakers WHERE id = :id";
 
-    if ($stmt->rowCount() == 0) {
-        $records[$key]['matchmaker_name'] = "No matchmaker";
-    } else {
-        $matchmaker = $db->fetchRow($stmt);
-        $records[$key]['matchmaker_name'] = $matchmaker['first_name'] . " " . $matchmaker['last_name'];
-    }
-}
+//     $params = [
+//         ':id' => $record['matchmaker_id']
+//     ];
+
+//     $stmt = $db->executePreparedStatement($sql, $params);
+
+//     if ($stmt->rowCount() == 0) {
+//         $records[$key]['matchmaker_name'] = "No matchmaker";
+//     } else {
+//         $matchmaker = $db->fetchRow($stmt);
+//         $records[$key]['matchmaker_name'] = $matchmaker['first_name'] . " " . $matchmaker['last_name'];
+//     }
+// }
 
 ?>
 <style>
@@ -58,19 +67,19 @@ foreach ($records as $key => $record) {
     <h1 class="text-center">Welcome, Admin</h1>
 </div>
 
-<div class="container-fluid">
-    <?php if ($records == []) {
-        echo "<h3>No clients have been added</h3>";
+<div class="container">
+    <?php if ($result == []) {
+        echo "<h3>No users are present</h3>";
     } else {
         ?>
         <div>
-            <h4>Number of total clients:
-                <?php echo " " . count($records) ?>
+            <h4>Total number of matchmakers:
+                <?php echo " " . count($result) ?>
             </h4>
         </div>
-        <h2>Details</h2>
+        <h2>Matchmaker Details</h2>
         <table class="table table-hover table-striped-columns table-responsive align-middle fs-6 text-center">
-            <thead>
+            <!-- <thead>
                 <th>
                     Image
                 </th>
@@ -101,40 +110,83 @@ foreach ($records as $key => $record) {
                 <th>
                     Description
                 </th>
+            </thead> -->
+            <thead>
+                <!-- id, email, status -->
+                <th>
+                    ID
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Change Authorization
+                </th>
+                <th>
+                    Operations
+                </th>
             </thead>
             <tbody>
                 <?php
-                foreach ($records as $row) { ?>
+                foreach ($result as $row) { ?>
                     <tr>
                         <td>
-                            <img src="<?php echo "./../" . $row['photo_path'] ?>" alt="Image" style="max-width: 100px;">
+                            <?php echo $row['id']; ?>
                         </td>
                         <td>
-                            <?php echo $row['matchmaker_name']; ?>
+                            <?php echo $row['email'] ?>
                         </td>
+                        <?php if ($row['status']) { ?>
+                            <td>
+                                Active
+                            </td>
+                            <td>
+                                <div>
+                                    <a class="text-light" style="text-decoration: none;"
+                                        onclick='sendRequest("deauthorize", <?php echo $row["id"]; ?>)'>
+                                        <button class="btn btn-danger">
+                                            Deauthorize
+                                        </button>
+                                    </a>
+                                </div>
+                            </td>
+                        <?php } else { ?>
+                            <td>
+                                Inactive
+                            </td>
+                            <td>
+                                <div>
+                                    <a class="text-light" style="text-decoration: none;"
+                                        onclick='sendRequest("authorize", <?php echo $row["id"]; ?>)'>
+                                        <button class="btn btn-success">
+                                            Authorize
+                                        </button>
+                                    </a>
+                                </div>
+                            </td>
+                        <?php } ?>
                         <td>
-                            <?php echo $row['first_name'] . " " . $row['last_name']; ?>
-                        </td>
-                        <td>
-                            <?php echo $row['dob']; ?>
-                        </td>
-                        <td>
-                            <?php echo $row['gender']; ?>
-                        </td>
-                        <td>
-                            <?php echo $row['education']; ?>
-                        </td>
-                        <td>
-                            <?php echo $row['occupation']; ?>
-                        </td>
-                        <td>
-                            <?php echo $row['contact']; ?>
-                        </td>
-                        <td>
-                            <?php echo $row['location']; ?>
-                        </td>
-                        <td>
-                            <?php echo $row['description']; ?>
+                            <div class="d-flex justify-content-around">
+                                <div>
+                                    <a class="edit-user text-light" style="text-decoration: none;"
+                                        href="<?php echo "./edit_user.php?id=" . $row['id'] ?>">
+                                        <button class="btn btn-info">
+                                            Edit
+                                        </button>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a class="delete-user text-light" style="text-decoration: none;"
+                                        href="<?php echo "./delete_user.php?id=" . $row['id'] ?>">
+                                        <button class="btn btn-danger">
+                                            Delete
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 <?php } ?>
@@ -142,5 +194,33 @@ foreach ($records as $key => $record) {
         </table>
     <?php } ?>
 </div>
+
+<script>
+    const sendRequest = (operation, clientId) => {
+        let confirmOperation = confirm("Are you sure you want to " + operation + " this user?");
+        if (confirmOperation) {
+            $.ajax({
+                url: "authorize_user.php",
+                type: "POST",
+                data: {
+                    id: clientId,
+                    operation: operation
+                },
+                success: function (data) {
+                    if (data == "success") {
+                        alert('User ' + operation + 'd successfully');
+                        console.log(data);
+                        window.location.reload();
+                    } else {
+                        alert('User not ' + operation + 'd');
+                    }
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
+        }
+    }
+</script>
 
 <?php include(__DIR__ . '/../includes/footer.php'); ?>

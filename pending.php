@@ -3,7 +3,7 @@
 <?php include(__DIR__.'/../includes/header.php'); ?>
 
 <div class="dashboard-container">
-    <h1>Welcome, Admin!</h1>
+    <h1>Welcome</h1>
     Your approval is pending.
 </div>
 

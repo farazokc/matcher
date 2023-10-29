@@ -1,7 +1,6 @@
-<!-- matchmakers/dashboard.php -->
+<!-- admin/view_all_clients.php -->
 <?php
-include(__DIR__ . '\\..\\session.php');
-// include(dirname(__DIR__) . '\\session.php');
+include(__DIR__ . '/../session.php');
 
 if (!isset($_SESSION['users_id']) || !isset($_SESSION['users_email'])) {
     // Redirect to login page if not logged in as a matchmaker
@@ -11,71 +10,55 @@ if (!isset($_SESSION['users_id']) || !isset($_SESSION['users_email'])) {
 
 include(__DIR__ . '/../includes/header.php');
 include(__DIR__ . '/navbar.php');
-include(__DIR__ . '/dashboard.php');
-
 global $db;
 
 $user_id = $_SESSION['users_id'];
 
 // Get the matchmaker's ID from clients table
-$sql = "SELECT clients.matchmaker_id 
-        FROM clients 
-        JOIN matchmakers ON clients.matchmaker_id = matchmakers.id 
-        JOIN users ON matchmakers.user_id = users.id
-        WHERE users.id = :id;";
+$sql = "SELECT * FROM clients";
 
-$params = [
-    ':id' => $user_id
-];
+$params = [];
 
 $stmt = $db->executePreparedStatement($sql, $params);
 
 if ($stmt->rowCount() == 0) {
-    $matchmaker_id = 0;
+    $records = [];
 } else {
-    $matchmaker_id = $db->fetchRow($stmt)['matchmaker_id'];
+    $records = $db->fetchAll($stmt);
 }
 
-// get the matchmaker's clients
-$sql = "SELECT * FROM clients WHERE matchmaker_id = :id";
+// get the matchmaker's name for each client
+foreach ($records as $key => $record) {
+    $sql = "SELECT first_name, last_name FROM matchmakers WHERE id = :id";
 
-$params = [
-    ':id' => $matchmaker_id
-];
+    $params = [
+        ':id' => $record['matchmaker_id']
+    ];
 
-$stmt = $db->executePreparedStatement($sql, $params);
+    $stmt = $db->executePreparedStatement($sql, $params);
 
-if ($stmt->rowCount() == 0) {
-    $clients = [];
-} else {
-    $clients = $db->fetchAll($stmt);
+    if ($stmt->rowCount() == 0) {
+        $records[$key]['matchmaker_name'] = "No matchmaker";
+    } else {
+        $matchmaker = $db->fetchRow($stmt);
+        $records[$key]['matchmaker_name'] = $matchmaker['first_name'] . " " . $matchmaker['last_name'];
+    }
 }
-
-global $user;
-$name_sql = "SELECT first_name, last_name FROM matchmakers WHERE user_id = :id";
-$params = [
-    ':id' => $user['id']
-];
-$stmt = $db->executePreparedStatement($name_sql, $params);
-$name = $db->fetchRow($stmt);
-$user_name = $name['first_name'] . " " . $name['last_name'];
 ?>
 
 
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1 class="text-center">Welcome,
-                <?php echo $user_name ?>
-            </h1>
+            <h1 class="text-center">All Clients</h1>
         </div>
-        <?php if ($clients == []) {
-            echo "<h3>No clients have been added</h3>";
+        <?php if ($records == []) {
+            echo "<h3>No records have been added</h3>";
         } else {
             ?>
             <div>
-                <h4>Number of total clients:
-                    <?php echo " " . count($clients) ?>
+                <h4>Number of total records:
+                    <?php echo " " . count($records) ?>
                 </h4>
             </div>
             <table class="table table-hover table-striped-columns table-responsive align-middle fs-5 text-center">
@@ -102,12 +85,15 @@ $user_name = $name['first_name'] . " " . $name['last_name'];
                         CNIC #
                     </th>
                     <th>
+                        Added by
+                    </th>
+                    <th>
                         Actions
                     </th>
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($clients as $row) { ?>
+                    foreach ($records as $row) { ?>
                         <tr>
                             <td>
                                 <img src="<?php echo "./../" . $row['photo_path'] ?>" alt="Image" style="max-width: 100px;">
@@ -129,6 +115,9 @@ $user_name = $name['first_name'] . " " . $name['last_name'];
                             </td>
                             <td>
                                 <?php echo $row['cnic']; ?>
+                            </td>
+                            <td>
+                                <?php echo $row['matchmaker_name']; ?>
                             </td>
                             <td>
                                 <div>

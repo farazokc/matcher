@@ -10,25 +10,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // removed admin option
     // $type = $_POST['type'];
-    // $type_val = 0;
+    // $status = 0;
 
     // if ($type == 'user') {
-    //     $type_val = 0;
+    //     $status = 0;
     // } else if ($type == 'admin') {
-    //     $type_val = 1;
+    //     $status = 1;
     // }
-
 
     // only user registration available
     $type = 'user';
-    $type_val = 0;
+    $status = 0;
 
     $sql = "INSERT INTO users (email, password, status) VALUES (:email, :password, :status)";
 
     $params = [
         ':email' => $email,
         ':password' => $password,
-        ':status' => $type_val,
+        ':status' => $status,
     ];
 
     try {
@@ -82,9 +81,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // users_id mein user_id from users table
         // USERS ID SET HO GYI HAI
+
         $_SESSION['users_id'] = $row['user_id'];
         $_SESSION['users_type'] = $type;
-        $_SESSION['users_status'] = $type_val;
+        $_SESSION['users_status'] = $status;
         $_SESSION['users_email'] = $row['email'];
 
         // echo "SESSION Dump in register_process: <br>";
@@ -99,8 +99,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // } else {
         //     echo "Doesn't exist";
         // }
+        echo "Your account has been created successfully. <br> Please wait for admin approval. <br> You will be redirected to the login page in 5 seconds. <br>";
 
-        header("Location: ./matchmakers/view_all.php");
+        // redirect after 5 seconds
+        header("refresh:5;url=./index.php");
+        // header("Location: ./index.php");
     } catch (PDOException $e) {
         die("Error: " . $e->getMessage());
     }
@@ -112,5 +115,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 } else {
     header("Location: register.php"); // Redirect if accessed directly
 }
-
 exit();

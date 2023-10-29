@@ -19,9 +19,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($row && $password == $row['password']) {
 
-        //redirect to matchmaker dashboard
+        // redirect to pending approval page
         if($type == 'user' && $row['status'] == 0){
+            // echo "pending approval";
+            $message = "pending";
+            
+            //redirect to matchmaker dashboard
+        } else if ($type == 'user' && $row['status'] == 1) {
+            // echo "user login";
             $message = "user";
+            
             // if user is a matchmaker, get matchmaker's info
             $mm_sql = "SELECT * FROM matchmakers WHERE user_id = :user_id";
             $mm_params = [
@@ -33,14 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $_SESSION['matchmakers_id'] = $mm_row['id'];
 
-
-        //redirect to pending admin dashboard
-        } else if ($type == 'admin' && $row['status'] == 1) {
-            $message = "pending";
-
-
         //redirect to admin dashboard
         } else if ($type == 'admin' && $row['status'] == 2) {
+            // echo "admin login";
             $message = "admin";
         }
 
@@ -61,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'success' => false,
             'message' => "pwd"
         );
-
         echo json_encode($response);
     }
 }
