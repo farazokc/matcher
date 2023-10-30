@@ -13,44 +13,23 @@ include(__DIR__ . '/../includes/header.php');
 include(__DIR__ . '/navbar.php');
 
 global $db;
-// Show table listing all users of system
 
-$sql = "SELECT * FROM users where `status` != 2 ORDER BY `status` ASC";
-$params = [
-    // ':status' => 2
-];
+$sql = "SELECT users.*, 
+        CONCAT( 
+            UCASE(LEFT(matchmakers.first_name, 1)), SUBSTRING(matchmakers.first_name, 2)
+            , ' ', 
+            UCASE(LEFT(matchmakers.last_name, 1)), SUBSTRING(matchmakers.last_name, 2) 
+        ) as full_name 
+        FROM users 
+        LEFT JOIN matchmakers 
+        ON (users.id = matchmakers.user_id) 
+        WHERE users.status IN (0, 1) 
+        ORDER BY users.status ASC;";
 
+$params = [];
 $stmt = $db->executePreparedStatement($sql, $params);
 $result = $db->fetchAll($stmt);
 
-// // $sql = "SELECT * FROM clients";
-// // $params = [];
-
-// // $stmt = $db->executePreparedStatement($sql, $params);
-
-// // if ($stmt->rowCount() == 0) {
-// //     $records = [];
-// // } else {
-// //     $records = $db->fetchAll($stmt);
-// // }
-
-// // get the matchmaker's name for each client
-// foreach ($records as $key => $record) {
-//     $sql = "SELECT first_name, last_name FROM matchmakers WHERE id = :id";
-
-//     $params = [
-//         ':id' => $record['matchmaker_id']
-//     ];
-
-//     $stmt = $db->executePreparedStatement($sql, $params);
-
-//     if ($stmt->rowCount() == 0) {
-//         $records[$key]['matchmaker_name'] = "No matchmaker";
-//     } else {
-//         $matchmaker = $db->fetchRow($stmt);
-//         $records[$key]['matchmaker_name'] = $matchmaker['first_name'] . " " . $matchmaker['last_name'];
-//     }
-// }
 
 ?>
 <style>
@@ -62,106 +41,126 @@ $result = $db->fetchAll($stmt);
     }
 </style>
 
-<div class="container-fluid">
-    <!-- <h1 class="text-center">Welcome, <?php ?></h1> -->
-    <h1 class="text-center">Welcome, Admin</h1>
-</div>
-
 <div class="container">
-    <?php if ($result == []) {
-        echo "<h3>No users are present</h3>";
-    } else {
-        ?>
-        <div>
-            <h4>Total number of matchmakers:
-                <?php echo " " . count($result) ?>
-            </h4>
+    <h1 class="text-center">All Matchmakers</h1>
+    <div class="d-flex justify-content-center align-items-center mb-3">
+        <div class="col-sm-12 col-md-6 col-lg-3 text-center me-2">
+            Filter users by name:
         </div>
-        <h2>Matchmaker Details</h2>
-        <table class="table table-hover table-striped-columns table-responsive align-middle fs-6 text-center">
-            <thead>
-                <th>
-                    ID
-                </th>
-                <th>
-                    Email
-                </th>
-                <th>
-                    Status
-                </th>
-                <th>
-                    Change Authorization
-                </th>
-                <th>
-                    Operations
-                </th>
-            </thead>
-            <tbody>
-                <?php
-                foreach ($result as $row) { ?>
-                    <tr>
-                        <td>
-                            <?php echo $row['id']; ?>
-                        </td>
-                        <td>
-                            <?php echo $row['email'] ?>
-                        </td>
-                        <?php if ($row['status']) { ?>
+        <div class="col-sm-12 col-md-6 col-lg-3">
+            <input type="text" class="form-control" id="searchName" placeholder="Enter name">
+        </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-6 col-lg-3 text-center me-2">
+            Filter users by email:
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3">
+            <input type="text" class="form-control" id="searchEmail" placeholder="Enter email">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-3 fs-5 text-center mb-3">
+            <?php if ($result == []) { ?>
+                No users have been added
+            </div>
+        <?php } else { ?>
+            Number of total users:
+            <?php echo " " . count($result) ?>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-striped-columns align-middle fs-6 text-center">
+                <thead>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Change Authorization
+                    </th>
+                    <th>
+                        Operations
+                    </th>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($result as $row) { ?>
+                        <tr>
                             <td>
-                                <strong>
-                                    Active
-                                </strong>
+                                <?php echo $row['id']; ?>
                             </td>
                             <td>
-                                <div>
-                                    <a class="text-light" style="text-decoration: none;"
-                                        onclick='sendRequest("deauthorize", <?php echo $row["id"]; ?>)'>
-                                        <button class="btn btn-danger">
-                                            Deauthorize
-                                        </button>
-                                    </a>
-                                </div>
-                            </td>
-                        <?php } else { ?>
-                            <td>
-                                Inactive
+                                <?php echo $row['full_name']; ?>
                             </td>
                             <td>
-                                <div>
-                                    <a class="text-light" style="text-decoration: none;"
-                                        onclick='sendRequest("authorize", <?php echo $row["id"]; ?>)'>
-                                        <button class="btn btn-success">
-                                            Authorize
-                                        </button>
-                                    </a>
+                                <?php echo $row['email'] ?>
+                            </td>
+                            <?php if ($row['status']) { ?>
+                                <td>
+                                    <strong>
+                                        Active
+                                    </strong>
+                                </td>
+                                <td>
+                                    <div>
+                                        <a class="text-light" style="text-decoration: none;"
+                                            onclick='sendRequest("deauthorize", <?php echo $row["id"]; ?>)'>
+                                            <button class="btn btn-danger">
+                                                Deauthorize
+                                            </button>
+                                        </a>
+                                    </div>
+                                </td>
+                            <?php } else { ?>
+                                <td>
+                                    Inactive
+                                </td>
+                                <td>
+                                    <div>
+                                        <a class="text-light" style="text-decoration: none;"
+                                            onclick='sendRequest("authorize", <?php echo $row["id"]; ?>)'>
+                                            <button class="btn btn-success">
+                                                Authorize
+                                            </button>
+                                        </a>
+                                    </div>
+                                </td>
+                            <?php } ?>
+                            <td>
+                                <div class="d-flex justify-content-around">
+                                    <div>
+                                        <a class="edit-user text-light" style="text-decoration: none;"
+                                            href="<?php echo "./edit_user.php?id=" . $row['id'] ?>">
+                                            <button class="btn btn-info">
+                                                Edit
+                                            </button>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a class="delete-user text-light" style="text-decoration: none;"
+                                            href="<?php echo "./delete_user.php?id=" . $row['id'] ?>">
+                                            <button class="btn btn-danger">
+                                                Delete
+                                            </button>
+                                        </a>
+                                    </div>
                                 </div>
                             </td>
-                        <?php } ?>
-                        <td>
-                            <div class="d-flex justify-content-around">
-                                <div>
-                                    <a class="edit-user text-light" style="text-decoration: none;"
-                                        href="<?php echo "./edit_user.php?id=" . $row['id'] ?>">
-                                        <button class="btn btn-info">
-                                            Edit Details
-                                        </button>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a class="delete-user text-light" style="text-decoration: none;"
-                                        href="<?php echo "./delete_user.php?id=" . $row['id'] ?>">
-                                        <button class="btn btn-danger">
-                                            Delete User
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-    <?php } ?>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<?php } ?>
 </div>
 
 <script>
@@ -190,6 +189,47 @@ $result = $db->fetchAll($stmt);
             });
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('searchName').addEventListener('input', function () {
+            filterTableByName(this.value.toLowerCase());
+        });
+
+        function filterTableByName(searchTerm) {
+            const rows = document.querySelectorAll('tbody tr');
+
+            rows.forEach(row => {
+                const name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+                if (name.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('searchEmail').addEventListener('input', function () {
+            filterTableByEmail(this.value.toLowerCase());
+        });
+
+        function filterTableByEmail(searchTerm) {
+            const rows = document.querySelectorAll('tbody tr');
+
+            rows.forEach(row => {
+                const email = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+
+                if (email.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    });
+
 </script>
 
 <?php include(__DIR__ . '/../includes/footer.php'); ?>

@@ -63,25 +63,26 @@ foreach ($records as $key => $record) {
 </style>
 
 <div class="container">
-    <div class="row">
-        <div class="d-flex align-items-center">
-            <div class="col-9">
-                <h1 class="text-center">All Clients</h1>
-            </div>
-            <div class="col-3">
-                <input type="text" class="form-control" id="searchName" placeholder="Search by Name">
-            </div>
+    <h1 class="text-center">All Clients</h1>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-6 col-lg-3 text-center me-2">
+            Filter clients by name:
         </div>
-        <?php if ($records == []) {
-            echo "<h3>No clients have been added</h3>";
-        } else {
-            ?>
-            <div>
-                <h4>Number of total clients:
-                    <?php echo " " . count($records) ?>
-                </h4>
+        <div class="col-sm-12 col-md-6 col-lg-3">
+            <input type="text" class="form-control" id="searchName" placeholder="Enter name">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-3 fs-5 text-center mb-3">
+            <?php if ($records == []) { ?>
+                No clients have been added
             </div>
-            <table class="table table-hover table-striped-columns table-responsive align-middle fs-5 text-center">
+        <?php } else { ?>
+            Number of total clients:
+            <?php echo " " . count($records) ?>
+        </div>
+        <div class="table-responsive-sm">
+            <table class="table table-hover table-striped-columns align-middle fs-5 text-center">
                 <thead>
                     <th>
                         Image
@@ -182,62 +183,63 @@ foreach ($records as $key => $record) {
                 </tbody>
             </table>
         </div>
-    <?php } ?>
+    </div>
+<?php } ?>
 
-    <?php include(__DIR__ . '/../includes/footer.php'); ?>
+<?php include(__DIR__ . '/../includes/footer.php'); ?>
 
-    <script>
-        const sendRequest = (operation, clientId) => {
-            if (operation == "delete") {
-                deleteClient(clientId);
-            }
+<script>
+    const sendRequest = (operation, clientId) => {
+        if (operation == "delete") {
+            deleteClient(clientId);
         }
+    }
 
-        const deleteClient = (clientId) => {
-            let confirmDelete = confirm("Are you sure you want to delete this client?");
-            if (confirmDelete) {
-                console.log("Deleting client with ID: " + clientId);
-                // window.location.href = "./delete_client.php?id=" + clientId;
+    const deleteClient = (clientId) => {
+        let confirmDelete = confirm("Are you sure you want to delete this client?");
+        if (confirmDelete) {
+            console.log("Deleting client with ID: " + clientId);
+            // window.location.href = "./delete_client.php?id=" + clientId;
 
-                $.ajax({
-                    url: "delete_client.php",
-                    type: "POST",
-                    data: { id: clientId },
-                    success: function (data) {
-                        if (data == "success") {
-                            alert('Record deleted successfully');
-                            window.location.reload();
-                        } else if (data == "imgDelError") {
-                            alert("Error deleting record image");
-                        } else if (data == "recordDelError") {
-                            alert('Error deleting record');
-                        }
-                    },
-                    error: function (e) {
-                        alert(e);
+            $.ajax({
+                url: "delete_client.php",
+                type: "POST",
+                data: { id: clientId },
+                success: function (data) {
+                    if (data == "success") {
+                        alert('Record deleted successfully');
+                        window.location.reload();
+                    } else if (data == "imgDelError") {
+                        alert("Error deleting record image");
+                    } else if (data == "recordDelError") {
+                        alert('Error deleting record');
                     }
-                });
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('searchName').addEventListener('input', function () {
-                filterTableByName(this.value.toLowerCase());
+                },
+                error: function (e) {
+                    alert(e);
+                }
             });
+        }
+    }
 
-            function filterTableByName(searchTerm) {
-                const rows = document.querySelectorAll('tbody tr');
-
-                rows.forEach(row => {
-                    const name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-
-                    if (name.includes(searchTerm)) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-            }
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('searchName').addEventListener('input', function () {
+            filterTableByName(this.value.toLowerCase());
         });
 
-    </script>
+        function filterTableByName(searchTerm) {
+            const rows = document.querySelectorAll('tbody tr');
+
+            rows.forEach(row => {
+                const name = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+                if (name.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    });
+
+</script>

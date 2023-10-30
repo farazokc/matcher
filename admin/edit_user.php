@@ -13,7 +13,19 @@ if (!isset($_GET['id'])) {
 
     // get users information from database
     global $db;
-    $sql = "SELECT * FROM users WHERE id = :id";
+
+    $sql = "SELECT users.*, 
+        CONCAT( 
+            UCASE(LEFT(matchmakers.first_name, 1)), SUBSTRING(matchmakers.first_name, 2)
+            , ' ', 
+            UCASE(LEFT(matchmakers.last_name, 1)), SUBSTRING(matchmakers.last_name, 2) 
+        ) as full_name 
+        FROM users 
+        LEFT JOIN matchmakers 
+        ON (users.id = matchmakers.user_id) 
+        WHERE users.id = :id;";
+
+    // $sql = "SELECT * FROM users WHERE id = :id";
     $params = [
         ':id' => $user_id
     ];
@@ -41,16 +53,22 @@ if (!isset($_GET['id'])) {
         -moz-appearance: textfield;
         /* Firefox */
     }
+
+    .custom-outline {
+        outline: 2px solid #007bff;
+        /* Change the color and width as needed */
+    }
 </style>
 
 <div class="container">
     <main>
         <div class="text-center">
-            <p class="fs-3">
+            <p class="fs-3 mb-3">
                 View Matchmaker Detail
             </p>
-            <div class="mb-3"></div>
+            <!-- <div class="mb-3"></div> -->
             <hr>
+            <small>Outlined items cannot be changed</small>
         </div>
         <div class="row g-5">
             <form id="client_form" method="POST">
@@ -65,8 +83,14 @@ if (!isset($_GET['id'])) {
                             <div class="row g-3">
                                 <div class="col-sm-12 col-md-3">
                                     <label for="id" class="form-label">ID</label>
-                                    <input type="text" class="form-control" id="id" name="id" placeholder=""
-                                        value="<?php echo $user['id']; ?>" readonly>
+                                    <input type="text" class="form-control custom-outline" id="id" name="id"
+                                        placeholder="" value="<?php echo $user['id']; ?>" readonly>
+                                </div>
+                                <div class="col-sm-12 col-md-3">
+                                    <label for="full_name" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control custom-outline" id="full_name"
+                                        name="full_name" placeholder="" value="<?php echo $user['full_name']; ?>"
+                                        readonly>
                                 </div>
                                 <div class="col-sm-12 col-md-3">
                                     <label for="email" class="form-label">Email</label>

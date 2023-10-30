@@ -82,7 +82,7 @@ $user_name = $name['first_name'] . " " . $name['last_name'];
 
 
 <div class="container">
-    <h1 class="text-center">Welcome,
+    <h1 class="text-center">Welcome
         <?php echo ucfirst($user_name); ?>
     </h1>
     <div class="d-flex justify-content-center align-items-center">
@@ -193,8 +193,6 @@ $user_name = $name['first_name'] . " " . $name['last_name'];
                                         </a>
                                     </div>
                                 </div>
-
-
                             </td>
                         </tr>
                     <?php } ?>
