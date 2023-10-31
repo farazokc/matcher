@@ -2,9 +2,21 @@
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="view_all.php" class="nav-link px-2 link-secondary">Dashboard</a></li>
-                <li><a href="add_client.php" class="nav-link px-2 link-body-emphasis">Add New Client</a></li>
-                <li><a href="view_all.php" class="nav-link px-2 link-body-emphasis">View Your Clients</a></li>
+                <li>
+                    <a href="view_all.php" class="nav-link px-2 link-secondary">
+                        <img src="matchmaker.png" alt="matchmaker" width="58" height="50">
+                    </a>
+                </li>
+                <li>
+                    <a href="add_client.php" class="nav-link px-2 link-body-emphasis" style="margin-top:11px;">Add New
+                        Client
+                    </a>
+                </li>
+                <li>
+                    <a href="view_all.php" class="nav-link px-2 link-body-emphasis" style="margin-top:11px;">
+                        View Your Clients
+                    </a>
+                </li>
                 <!-- <li><a href="search.php" class="nav-link px-2 link-body-emphasis">Search</a></li> -->
             </ul>
             <div class="dropdown text-end">

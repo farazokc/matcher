@@ -5,7 +5,6 @@ class clientModel
 {
     // all form fields that are being received
     public $client_id;
-    public $matchmaker_id;
     public $name;
     public $age;
     public $gender;
@@ -50,7 +49,6 @@ class clientModel
     {
         //client id recieved by appending into formData object
         $this->client_id = $_POST['client_id'];
-        $this->matchmaker_id = $_SESSION['matchmakers_id'];
 
         // ************** Personal Information ****************
 
@@ -137,7 +135,6 @@ class clientModel
 
         $sql = "UPDATE clients 
         SET 
-            matchmaker_id = :matchmaker_id,
             name = :name,
             age = :age,
             gender = :gender,
@@ -182,7 +179,6 @@ class clientModel
         $params = [
             // match parameters to values
             ':client_id' => $this->client_id,
-            ':matchmaker_id' => $this->matchmaker_id,
             ':name' => $this->name,
             ':age' => $this->age,
             ':gender' => $this->gender,

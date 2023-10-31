@@ -306,6 +306,12 @@ if (!isset($_GET['id'])) {
     </main>
 </div>
 
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+        <span class="mb-3 ms-2 me-2 mb-md-0 lh-1">&copy; 2023 MKAGI</span>
+    </div>
+</footer>
+
 <?php include(__DIR__ . '/../includes/footer.php'); ?>
 
 <script>

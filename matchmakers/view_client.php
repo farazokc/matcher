@@ -306,6 +306,12 @@ if (!isset($_GET['id'])) {
     </main>
 </div>
 
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+        <span class="mb-3 ms-2 me-2 mb-md-0 lh-1">&copy; 2023 MKAGI</span>
+    </div>
+</footer>
+
 <?php include(__DIR__ . '/../includes/footer.php'); ?>
 
 <script>
@@ -316,20 +322,6 @@ if (!isset($_GET['id'])) {
 
 <?php
 if (isset($_GET['mode']) && $_GET['mode'] == 'print') {
-    // //if print is set, call javascript function to print the page
-    // echo "PRINT THE PAGE";
     echo "<script>printPage();</script>";
 }
-
-// //get current url
-// $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-
-// //get all passed arguments
-// $url_components = parse_url($url);
-
-// // Use parse_str() function to parse the
-// // string passed via URL
-// parse_str($url_components['query'], $params);
-
-// echo "Print file: " . $params['print'] . "<br>";
 ?>

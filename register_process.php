@@ -107,12 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } catch (PDOException $e) {
         die("Error: " . $e->getMessage());
     }
-    // } 
-    // else if ($type == 'admin') {
-    //     header("Location: admin/pending.php");
-    //     exit();
-    // }
 } else {
-    header("Location: register.php"); // Redirect if accessed directly
+    header("Location: register.php");
 }
 exit();

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 29, 2023 at 11:05 PM
+-- Generation Time: Oct 30, 2023 at 09:16 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -76,9 +76,7 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`id`, `matchmaker_id`, `gender`, `name`, `age`, `height`, `cnic`, `cast`, `maslak`, `complexion`, `marital_status`, `div_reason`, `children`, `education`, `job`, `business`, `income`, `mother_tongue`, `belongs`, `photo_path`, `country`, `province`, `city`, `area`, `family_status`, `full_address`, `home_type`, `home_size`, `father`, `mother`, `brothers`, `sisters`, `req_age`, `req_cast`, `req_maslak`, `req_height`, `req_family_status`, `req_marital_status`, `req_education`, `req_city`, `req_country`) VALUES
-(7, 25, 'Male', 'umair hashmi', 22, 180.00, '4220112345671', 'Hashmi', 'Muslim', 'Fair', 'Single', '', 0, 'BS Computer Science', 'Software Engineer', '', 180000.00, 'Urdu', 'Pakistan', 'images\\7.jpg', 'Pakistan', 'Sindh', 'Karachi', 'Gulsha-e-Iqbal', '', '', '', '', '', '', '', '', 23, 'Hashmi', 'Muslim', 0.00, '', 'Single', 'Bachelor\'s', 'Karachi', 'Pakistan'),
-(8, 24, 'Male', 'tariq daniyal', 23, 186.00, '4220123456781', 'Jutt', 'Muslim', 'Fair', 'Single', '', 0, 'BS Computer Science', '', 'Freelance', 200000.00, 'Urdu', 'Pakistan', 'images\\8.jfif', '', '', '', '', '', '', '', '', '', '', '', '', 20, 'Jutt', 'Muslim', 0.00, '', 'Single ', 'Bachelor\'s', 'Karachi', 'Pakistan'),
-(9, 23, 'Male', 'faraz naeem piracha', 20, 175.00, '4220112312312', 'Piracha', 'Muslim', 'Fair', 'Single', '', 0, 'BS Software Engineering', 'Student', 'Freelance', 0.00, 'Urdu', 'Pakistan', 'images\\9.jpeg', '', '', '', '', '', '', '', '', '', '', '', '', 20, 'Any', 'Muslim', 0.00, '', 'Single', 'Bachelor\'s', 'Karachi', 'Pakistan');
+(9, 23, 'Male', 'faraz', 20, 175.00, '4220112312312', 'Piracha', 'Muslim', 'Fair', 'Single', '', 0, 'BS Software Engineering', 'Student', 'Freelance', 0.00, 'Urdu', 'Pakistan', 'images\\9.jpeg', '', '', '', '', '', '', '', '', '', '', '', '', 20, 'Any', 'Muslim', 0.00, '', 'Single', 'Bachelor\'s', 'Karachi', 'Pakistan');
 
 -- --------------------------------------------------------
 
@@ -100,9 +98,7 @@ CREATE TABLE `matchmakers` (
 --
 
 INSERT INTO `matchmakers` (`id`, `user_id`, `first_name`, `last_name`, `email`, `phone`) VALUES
-(23, 58, 'faraz', 'naeem', 'faraz@gmail.com', '03212232026'),
-(24, 59, 'jahiz', 'ahmad', 'jahiz.ahmed@gmail.com', '03123456789'),
-(25, 60, 'ateeq', 'ahmad', 'ateeq.ahmad@gmail.com', '03123456789');
+(23, 58, 'faraz', 'naeem', 'faraz@gmail.com', '03212232026');
 
 -- --------------------------------------------------------
 
@@ -123,9 +119,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `password`, `status`) VALUES
 (37, 'admin@gmail.com', 'admin_password', 2),
-(58, 'faraz@gmail.com', 'pass', 1),
-(59, 'jahiz.ahmed@gmail.com', 'password', 1),
-(60, 'ateeq.ahmad@gmail.com', 'ateeqahmad', 1);
+(58, 'faraz@gmail.com', 'pass', 1);
 
 --
 -- Indexes for dumped tables

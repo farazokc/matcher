@@ -44,11 +44,6 @@ class clientModel
     public $req_education;
     public $req_city;
     public $req_country;
-
-    // public $images = [];
-    // public $image_names = [];
-    // public $img_tmp_name = [];
-    // public $targetFiles = [];
     public $image;
     public $image_name;
     public $imageFileType;
@@ -385,89 +380,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // insert to db
     $client->insertToDB();
-
-
-    // get matchmaker id from session
-    // $matchmaker_id = $_SESSION['matchmakers_id'];
-
-    // Get and transform data from the request
-    // *******************************************************
-    // $first_name = strtolower($_POST['first_name']);
-    // $last_name = strtolower($_POST['last_name']);
-
-    // $plainDate = $_POST['DOB'];
-    // $DOB = date('Y-m-d', strtotime($plainDate));
-
-    // $gender = $_POST['gender'];
-    // $education = $_POST['education'];
-    // $full_address = $_POST['full_address'];
-    // $contact = $_POST['contact'];
-    // $description = $_POST['description'];
-    // *******************************************************
-
-    //get the last client id from the table
-
-    // $client_id = getIncrementId();
-
-
-    // set target file path
-    // $image_name = $_FILES['image']['name'];
-    // $exp = explode(".", $image_name);
-    // $imageFileType = end($exp);
-
-    // $targetFile = $target_dir . $client_id . '.' . $imageFileType; // set file name from client id
-
-    // $uploadOk = 1;
-
-    // Check if image file is a actual image or fake image
-    // $check = getimagesize($_FILES["image"]["tmp_name"]);
-    // if (!$check) {
-    //     echo "Fake image"; // Not a valid image format
-    //     $uploadOk = 0;
-    //     return;
-    // }
-
-    // Check if file already exists
-
-
-    // Check file size under 5MB
-    // if (!checkUnderFileSize($_FILES['image']['size'])) {
-    //     echo "sizeError";
-    //     $uploadOk = 0;
-    //     return;
-    // }
-
-    // Allow certain file formats
-    // if (!checkFileExtAllowed($imageFileType)) {
-    //     echo "extError";
-    //     $uploadOk = 0;
-    //     return;
-    // }
-
-    // If everything is ok, try to upload file
-    // if (move_uploaded_file($_FILES["image"]["tmp_name"], __DIR__ . "/../" . $targetFile)) {
-    //     $sql = "INSERT INTO clients (matchmaker_id, gender, first_name, last_name, age, photo_path, education, occupation, contact, location, description) VALUES (:matchmaker_id, :gender, :first_name, :last_name, :age, :photo_path, :education, :occupation, :contact, :location, :description)";
-
-    //     $params = [
-    //         // match parameters to values
-    //         ':matchmaker_id' => $matchmaker_id,
-    //         ':gender' => $gender,
-    //         ':first_name' => $first_name,
-    //         ':last_name' => $last_name,
-    //         ':age' => $DOB,
-    //         ':photo_path' => $targetFile,
-    //         ':education' => $education,
-    //         ':occupation' => $full_address,
-    //         ':contact' => $contact,
-    //         ':location' => $full_address,
-    //         ':description' => $description
-    //     ];
-
-    //     $stmt = $db->executePreparedStatement($sql, $params);
-    //     echo "success"; // Image uploaded successfully
-    // } else {
-    //     echo "fileError"; // Error uploading file
-    // }
-
 }
 ?>

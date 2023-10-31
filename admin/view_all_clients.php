@@ -62,129 +62,137 @@ foreach ($records as $key => $record) {
     }
 </style>
 
-<div class="container">
-    <h1 class="text-center">All Clients</h1>
-    <div class="d-flex justify-content-center align-items-center">
-        <div class="col-sm-12 col-md-6 col-lg-3 text-center me-2">
-            Filter clients by name:
-        </div>
-        <div class="col-sm-12 col-md-6 col-lg-3">
-            <input type="text" class="form-control" id="searchName" placeholder="Enter name">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12 col-md-6 col-lg-3 fs-5 text-center mb-3">
-            <?php if ($records == []) { ?>
-                No clients have been added
+<main>
+    <div class="container">
+        <h1 class="text-center">All Clients</h1>
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="col-sm-12 col-md-6 col-lg-3 text-center me-2">
+                Filter clients by name:
             </div>
-        <?php } else { ?>
-            Number of total clients:
-            <?php echo " " . count($records) ?>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+                <input type="text" class="form-control" id="searchName" placeholder="Enter name">
+            </div>
         </div>
-        <div class="table-responsive-sm">
-            <table class="table table-hover table-striped-columns align-middle fs-5 text-center">
-                <thead>
-                    <th>
-                        Image
-                    </th>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Age
-                    </th>
-                    <th>
-                        Gender
-                    </th>
-                    <th>
-                        Education
-                    </th>
-                    <th>
-                        Income
-                    </th>
-                    <th>
-                        CNIC #
-                    </th>
-                    <th>
-                        Added by
-                    </th>
-                    <th>
-                        Actions
-                    </th>
-                </thead>
-                <tbody>
-                    <?php foreach ($records as $row) { ?>
-                        <tr>
-                            <td>
-                                <img src="<?php echo "./../" . $row['photo_path'] ?>" alt="Image"
-                                    style="max-width: 150px; max-height: 150px;">
-                            </td>
-                            <td>
-                                <?php echo ucfirst($row['name']); ?>
-                            </td>
-                            <td>
-                                <?php echo $row['age']; ?>
-                            </td>
-                            <td>
-                                <?php echo $row['gender']; ?>
-                            </td>
-                            <td>
-                                <?php echo $row['education']; ?>
-                            </td>
-                            <td>
-                                <?php echo $row['income']; ?>
-                            </td>
-                            <td>
-                                <?php echo round($row['cnic']); ?>
-                            </td>
-                            <td>
-                                <?php echo $row['matchmaker_name']; ?>
-                            </td>
-                            <td>
-                                <div class="d-flex justify-content-around align-items-center">
-                                    <div class="mb-1">
-                                        <a class="view-client text-light" style="text-decoration: none;"
-                                            href='<?php echo "./view_client.php?id=" . $row['id'] . "&mode=view" ?>'>
-                                            <button class="btn btn-primary">
-                                                View
-                                            </button>
-                                        </a>
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-3 fs-5 text-center my-3">
+                <?php if ($records == []) { ?>
+                    No clients have been added
+                </div>
+            <?php } else { ?>
+                Number of total clients:
+                <?php echo " " . count($records) ?>
+            </div>
+            <div class="table-responsive-sm col-12">
+                <table class="table table-hover table-striped-columns align-middle fs-5 text-center">
+                    <thead>
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Age
+                        </th>
+                        <th>
+                            Gender
+                        </th>
+                        <th>
+                            Education
+                        </th>
+                        <th>
+                            Income
+                        </th>
+                        <th>
+                            CNIC #
+                        </th>
+                        <th>
+                            Added by
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($records as $row) { ?>
+                            <tr>
+                                <td>
+                                    <img src="<?php echo "./../" . $row['photo_path'] ?>" alt="Image"
+                                        style="max-width: 150px; max-height: 150px;">
+                                </td>
+                                <td>
+                                    <?php echo ucfirst($row['name']); ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['age']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['gender']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['education']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['income']; ?>
+                                </td>
+                                <td>
+                                    <?php echo round($row['cnic']); ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['matchmaker_name']; ?>
+                                </td>
+                                <td style="width: 100px;">
+                                    <div class="row">
+                                        <div class="col-12 mb-1">
+                                            <a class="view-client text-light" style="text-decoration: none;"
+                                                href='<?php echo "./view_client.php?id=" . $row['id'] . "&mode=view" ?>'>
+                                                <button class="btn btn-primary" style="width:100%;">
+                                                    View
+                                                </button>
+                                            </a>
+                                        </div>
+
+                                        <div class="col-12 mb-1">
+                                            <a class="edit-client text-light" style="text-decoration: none;"
+                                                href="<?php echo "./edit_client.php?id=" . $row['id'] ?>">
+                                                <button class="btn btn-warning" style="width:100%;">
+                                                    Edit
+                                                </button>
+                                            </a>
+                                        </div>
+
+                                        <div class="col-12 mb-1">
+                                            <a class="delete-client text-light" style="text-decoration: none;"
+                                                onclick='sendRequest("delete", <?php echo $row["id"]; ?>)'>
+                                                <button class="btn btn-danger" style="width:100%;">
+                                                    Delete
+                                                </button>
+                                            </a>
+                                        </div>
+                                        <div class="col-12 mb-1">
+                                            <a class="print-client text-light" style="text-decoration: none;"
+                                                href='<?php echo "./view_client.php?id=" . $row['id'] . "&mode=print" ?>'>
+                                                <button class="btn btn-info" style="width:100%;">
+                                                    Share
+                                                </button>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div class="mb-1">
-                                        <a class="edit-client text-light" style="text-decoration: none;"
-                                            href="<?php echo "./edit_client.php?id=" . $row['id'] ?>">
-                                            <button class="btn btn-warning">
-                                                Edit
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-around align-items-center">
-                                    <div class="mb-1">
-                                        <a class="delete-client text-light" style="text-decoration: none;"
-                                            onclick='sendRequest("delete", <?php echo $row["id"]; ?>)'>
-                                            <button class="btn btn-danger">
-                                                Delete
-                                            </button>
-                                        </a>
-                                    </div>
-                                    <div class="mb-1">
-                                        <a class="print-client text-light" style="text-decoration: none;"
-                                            href='<?php echo "./view_client.php?id=" . $row['id'] . "&mode=print" ?>'>
-                                            <button class="btn btn-info">
-                                                Share
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
+    <?php } ?>
+</main>
+
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+        <span class="mb-3 ms-2 me-2 mb-md-0 lh-1">&copy; 2023 MKAGI</span>
     </div>
-<?php } ?>
+</footer>
 
 <?php include(__DIR__ . '/../includes/footer.php'); ?>
 

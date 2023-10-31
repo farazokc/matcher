@@ -55,7 +55,7 @@ if (!isset($_GET['id'])) {
     }
 
     .custom-outline {
-        outline: 2px solid #007bff;
+        outline: 2px solid red;
         /* Change the color and width as needed */
     }
 </style>
@@ -66,7 +66,6 @@ if (!isset($_GET['id'])) {
             <p class="fs-3 mb-3">
                 View Matchmaker Detail
             </p>
-            <!-- <div class="mb-3"></div> -->
             <hr>
             <small>Outlined items cannot be changed</small>
         </div>
@@ -136,7 +135,7 @@ if (!isset($_GET['id'])) {
                                         If STATUS is 1, the user IS authorized to use the system. The user can
                                     <ul>
                                         <li>Log in</li>
-                                        <li>Create View Update and delete respective client records</li>
+                                        <li>Create, View, Update and Delete respective client records</li>
                                         <li>Use relevant functions</li>
                                     </ul>
                                     </p>
@@ -148,9 +147,14 @@ if (!isset($_GET['id'])) {
             </form>
         </div>
     </main>
-
-    <footer class="my-5"></footer>
 </div>
+
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+        <span class="mb-3 ms-2 me-2 mb-md-0 lh-1">&copy; 2023 MKAGI</span>
+    </div>
+</footer>
+
 
 <?php include(__DIR__ . '/../includes/footer.php'); ?>
 

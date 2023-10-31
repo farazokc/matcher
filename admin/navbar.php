@@ -2,9 +2,21 @@
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="dashboard.php" class="nav-link px-2 link-secondary">Admin Dashboard</a></li>
-                <li><a href="view_all_clients.php" class="nav-link px-2 link-body-emphasis">View All Clients</a></li>
-                <!-- <li><a href="#" class="nav-link px-2 link-body-emphasis">Search</a></li> -->
+                <li>
+                    <a href="dashboard.php" class="nav-link px-2 link-secondary">
+                        <img src="admin.png" alt="admin" width=35.6 height=39.2>
+                    </a>
+                </li>
+                <li>
+                    <a href="dashboard.php" class="nav-link px-2 link-body-emphasis" style="margin-top:5.5px;">
+                        Matchmakers
+                    </a>
+                </li>
+                <li>
+                    <a href="view_all_clients.php" class="nav-link px-2 link-body-emphasis" style="margin-top:5.5px;">
+                        Clients
+                    </a>
+                </li>
             </ul>
             <div class="dropdown text-end">
                 <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
