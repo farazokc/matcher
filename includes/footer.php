@@ -6,35 +6,27 @@
           <a href="index.php" class="nav-link px-2 link-secondary">
           </a>
           <h6 class="text-uppercase mb-4 font-weight-bold">
-            SK Matrimonials International
+            Matrimonials Website
           </h6>
           <p>
-            Welcome to SK Matrimonials, your trusted destination for finding true love and lifelong companionship. Our
-            mission is to connect hearts, create lasting bonds, and make your journey to love as seamless as possible.
+            Website created for client upon request
           </p>
-          <p>Join us today and start your journey to a lifetime of happiness.</p>
-
+          <p>Pure PHP website</p>
         </div>
         <hr class="w-100 clearfix d-md-none" />
-
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-          <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-          <p><i class="fas fa-home mr-3"></i> Office No. R-200, Gulshan-e-Areesha, Scheme 33, Main University Road,
-            Karachi.</p>
-          <p><i class="fas fa-envelope mr-3"></i><a href="mailto:kamilworld@gmail.com">kamilworld@gmail.com</a></p>
-          <p><i class="fas fa-phone mr-3"></i><a href="tel:+11234567890">+1 (123) 456-7890</a></p>
-          <p><i class="fas fa-phone mr-3"></i><a href="tel:+923323661898">+92 332-3661898</a></p>
+          <h6 class="text-uppercase mb-4 font-weight-bold">GitHub</h6>
+          <p><i class="fa-brands fa-github"></i><a href="https://farazokc.github.io/resume.github.io/">A little about myself</a></p>
         </div>
     </section>
   </div>
 
   <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2)">
     Copyright © 2023
-    <a class="text-white" href="https://skmatrimonial.com/">SK Matrimonials International</a>
   </div>
   <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2)">
-    Powered by
-    <a class="text-white" href="https://techindesign.net/">Tech In Design</a>
+    Powered by 
+    <a class="text-white" href="https://farazokc.github.io/resume.github.io/">Me!</a>
 
   </div>
 </footer>
