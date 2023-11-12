@@ -1,7 +1,5 @@
-<!-- admin/dashboard.php -->
-
 <?php
-include(__DIR__ . '/../session.php');
+include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'session.php');
 
 if (!isset($_SESSION['users_email'])) {
     global $home;
@@ -9,8 +7,8 @@ if (!isset($_SESSION['users_email'])) {
     exit();
 }
 
-include(__DIR__ . '/../includes/header.php');
-include(__DIR__ . '/navbar.php');
+include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'header.php');
+include(__DIR__ . DIRECTORY_SEPARATOR . 'navbar.php');
 
 global $db;
 
@@ -40,8 +38,8 @@ $result = $db->fetchAll($stmt);
         /* Inherit color from parent element (button) */
     }
 </style>
-<main>
-    <div class="container">
+<main class="pb-5">
+    <div  class="container">
         <h1 class="text-center">All Matchmakers</h1>
         <div class="d-flex justify-content-center align-items-center mb-3">
             <div class="col-sm-12 col-md-6 col-lg-3 text-center me-2">
@@ -153,24 +151,6 @@ $result = $db->fetchAll($stmt);
                                             </a>
                                         </div>
                                     </div>
-                                    <!-- <div class="d-flex justify-content-around">
-                                        <div>
-                                            <a class="edit-user text-light" style="text-decoration: none;"
-                                                href="<?php // echo "./edit_user.php?id=" . $row['id'] ?>">
-                                                <button class="btn btn-info">
-                                                    Edit
-                                                </button>
-                                            </a>
-                                        </div>
-                                        <div>
-                                            <a class="delete-user text-light" style="text-decoration: none;"
-                                                href="<?php // echo "./delete_user.php?id=" . $row['id'] ?>">
-                                                <button class="btn btn-danger">
-                                                    Delete
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </div> -->
                                 </td>
                             </tr>
                         <?php } ?>
@@ -182,13 +162,7 @@ $result = $db->fetchAll($stmt);
     </div>
 </main>
 
-<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
-    <div class="col-md-4 d-flex align-items-center">
-        <span class="mb-3 ms-2 me-2 mb-md-0 lh-1">&copy; 2023 MKAGI, Inc</span>
-    </div>
-</footer>
-
-<?php include(__DIR__ . '/../includes/footer.php'); ?>
+<?php include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'footer.php'); ?>
 
 <script>
     const sendRequest = (operation, clientId) => {

@@ -1,8 +1,8 @@
 <!-- matchmakers/dashboard.php -->
 <?php
-include(__DIR__ . '/../session.php');
-include(__DIR__ . '/../includes/header.php');
-include(__DIR__ . '/navbar.php');
+include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'session.php');
+include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'header.php');
+include(__DIR__ . DIRECTORY_SEPARATOR . 'navbar.php');
 ?>
 
 <style>
@@ -359,13 +359,7 @@ include(__DIR__ . '/navbar.php');
     </main>
 </div>
 
-<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
-    <div class="col-md-4 d-flex align-items-center">
-        <span class="mb-3 ms-2 me-2 mb-md-0 lh-1">&copy; 2023 MKAGI</span>
-    </div>
-</footer>
-
-<?php include(__DIR__ . '/../includes/footer.php'); ?>
+<?php include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'footer.php'); ?>
 
 <script>
     document.getElementById('image').addEventListener('change', function () {
@@ -391,7 +385,7 @@ include(__DIR__ . '/navbar.php');
     function clearForm() {
         $('#client_form')[0].reset();   // clears form data
         $('#imagePreview').attr('src', '').hide(); // clears image preview
-        $('#image').val('');
+        // $('#image').val('');
         $('#error_alert').hide();   // hides error alert
         $('#errorList').empty();    // clears error list
     }

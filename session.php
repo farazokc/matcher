@@ -1,13 +1,6 @@
 <?php
 session_start();
-include('includes/database.php');
-
-// $home = __DIR__ . DIRECTORY_SEPARATOR . "index.php";
-
-// echo "SESSION Dump in session.php: <br>";
-// echo "<pre>";
-// echo var_dump($_SESSION);
-// echo "</pre>";
+include('includes' . DIRECTORY_SEPARATOR . 'database.php');
 
 if (isset($_SESSION['users_email']) || isset($_SESSION['users_id'])) {
 	$email = $_SESSION['users_email'];
@@ -21,8 +14,6 @@ if (isset($_SESSION['users_email']) || isset($_SESSION['users_id'])) {
 	if ($stmt) {
 		$user = $db->fetchRow($stmt);
 	} else {
-		// echo "dying";
 		die("Error selecting data: " . $stmt->error);
 	}
 }
-// }

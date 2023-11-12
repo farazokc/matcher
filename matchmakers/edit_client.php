@@ -1,8 +1,7 @@
-<!-- matchmakers/dashboard.php -->
 <?php
-include(__DIR__ . '/../session.php');
-include(__DIR__ . '/../includes/header.php');
-include(__DIR__ . '/navbar.php');
+include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'session.php');
+include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'header.php');
+include(__DIR__ . DIRECTORY_SEPARATOR . 'navbar.php');
 
 if (!isset($_GET['id'])) {
     header('Location: view_all.php');
@@ -31,9 +30,6 @@ if (!isset($_GET['id'])) {
     $stmt_mm_id = $db->executePreparedStatement($sql_mm_id, $params_mm_id);
     $mm_id = $db->fetchRow($stmt_mm_id);
 
-
-    // echo "Matchmaker ID: " . $client['matchmaker_id'] . "<br>";
-    // echo "mm_id: " . $mm_id['id'] . "<br>";
 
     if (!$client) {
         header('Location: view_all.php');
@@ -434,13 +430,7 @@ if (!isset($_GET['id'])) {
     </main>
 </div>
 
-<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
-    <div class="col-md-4 d-flex align-items-center">
-        <span class="mb-3 ms-2 me-2 mb-md-0 lh-1">&copy; 2023 MKAGI</span>
-    </div>
-</footer>
-
-<?php include(__DIR__ . '/../includes/footer.php'); ?>
+<?php include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'footer.php'); ?>
 
 <script>
     function validateClientForm() {

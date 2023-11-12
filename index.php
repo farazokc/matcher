@@ -1,7 +1,7 @@
-<!-- index.php -->
 <?php
-include('includes/header.php');
+include('includes' . DIRECTORY_SEPARATOR . 'header.php');
 ?>
+
 <style>
     <?php include('index.css'); ?>
     input[type="radio"] {
@@ -9,11 +9,15 @@ include('includes/header.php');
     }
 </style>
 
-<body class="d-flex align-items-center py-4 bg-body-tertiary h-100">
+<body class="d-flex align-items-center bg-body-tertiary h-100">
     <main class="form-signin w-100 m-auto">
         <form onsubmit="login(event)" method="POST">
-            <h1 class="h3 mb-3 fw-normal">Sign in</h1>
+     
+        <a href="index.php" class="nav-link px-2 link-secondary">
+        <img src="admin\admin.png" alt="admin" width=220 height=60>
+</a>
 
+        <h1 class="h3 mb-3 fw-normal"></h1>
             <div class="alert alert-danger alert-dismissible d-none fade show" id="wrong-password-alert" role="alert">
                 <strong>Incorrect email or password</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -49,13 +53,12 @@ include('includes/header.php');
             </div>
 
             <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-            <p class="mt-5 mb-3 text-body-secondary">&copy; MKAGI</p>
         </form>
     </main>
+    
 </body>
 
-<?php include('includes/footer.php'); ?>
-
+<?php include('includes' . DIRECTORY_SEPARATOR . 'footer.php'); ?>
 <script>
     function pwdAlert(){
         alert("Please contact the admin to reset your password.");
@@ -91,11 +94,17 @@ include('includes/header.php');
             if (!data.success && data.message == "pwd") {
                 document.getElementById("wrong-password-alert").classList.remove("d-none");
             } else if (data.success && data.message == "user") {
-                window.location.href = './matchmakers/view_all.php';
+                <?php 
+                $path_user = './matchmakers/view_all.php';
+                ?>
+                window.location.href = '<?php echo $path_user ?>' ;
             } else if (data.success && data.message == "pending") {
                 alert("Your account is still pending approval. Please wait for the admin to approve your account.");
             } else if (data.success && data.message == "admin") {
-                window.location.href = './admin/dashboard.php';
+                <?php 
+                $path_admin = './admin/dashboard.php';
+                ?>
+                window.location.href = '<?php echo $path_admin ?>' ;
             }
         } catch (e) {
             console.log(e);

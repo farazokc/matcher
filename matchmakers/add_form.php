@@ -1,5 +1,5 @@
 <?php
-include(__DIR__ . '/../session.php');
+include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'session.php');
 
 class clientModel
 {
@@ -156,20 +156,18 @@ class clientModel
     {
         $exp = explode(".", $this->image_name);
         $this->imageFileType = strtolower(end($exp));
-        // echo "Image extension: " . $this->imageFileType;
         return;
     }
 
     public function setTargetFile()
     {
-        $this->targetFile = $this->target_dir . $this->client_id . '.' . $this->imageFileType;
+        // $this->targetFile = $this->target_dir . $this->client_id . '.' . $this->imageFileType;
+        $this->targetFile = $this->target_dir . 'image' . '.' . $this->imageFileType;
         return;
     }
 
     public function checkImageReal()
     {
-        // Check if image file is a actual image or fake image
-        // echo "img_tmp_name" . $this->img_tmp_name;
         $check = getimagesize($this->img_tmp_name);
         if ($check) {
             return 1;
@@ -200,11 +198,6 @@ class clientModel
         foreach ($this as $key => $value) {
             if (!isset($value)) {
                 $this->$key = null;
-                // if (is_string($value)) {
-                //     $this->$key = "";
-                // } else if (is_numeric($value)) {
-                //     $this->$key = 0;
-                // }
             }
         }
     }
@@ -212,36 +205,15 @@ class clientModel
     public function insertToDB()
     {
         global $db;
-
         $this->checkFormFields();
 
-        if (move_uploaded_file($this->img_tmp_name, __DIR__ . "/../" . ($this->targetFile))) {
-            // $matchmaker_id, $name, $age, $gender, $cnic, $cast, $maslak, $mother_tongue, $height, $complexion, $marital_status, $div_reason, $children, $education, $job, $business, $income, $area, $city, $country, $full_address, $home_type, $home_size, $belongs, $family_status, $home_status, $contact, $father, $mother, $sisters, $brothers, $req_age, $req_cast, $req_height, $req_family_status, $req_maslak, $req_marital_status, $req_education, $req_city, $req_country;
-
-            // $sql = "INSERT INTO clients (matchmaker_id, name, age, gender, photo_path, education, occupation, contact, location, description) VALUES (:matchmaker_id, :gender, :age, :photo_path, :education, :occupation, :contact, :location, :description)";
-
-            // ':matchmaker_id' => $this->matchmaker_id,
-            // ':gender' => $this->gender,
-            // ':first_name' => $this->first_name,
-            // ':last_name' => $this->last_name,
-            // ':age' => $this->age,
-            // ':photo_path' => $this->targetFile,
-            // ':education' => $this->education,
-            // ':occupation' => $this->full_address,
-            // ':contact' => $this->contact,
-            // ':location' => $this->full_address,
-            // ':description' => $this->description
-
-            // photo_path, province not being input 
-            // req_income removed
-
-            $sql = "INSERT INTO 
-            clients (matchmaker_id, name, age, gender, cnic, cast, maslak, mother_tongue, height, complexion, marital_status, div_reason, children, education, job, business, income, area, city, province, country, full_address, home_type, home_size, belongs, photo_path, family_status, father, mother, sisters, brothers, req_age, req_cast, req_height, req_family_status, req_maslak, req_marital_status, req_education, req_city, req_country) 
-            VALUES (:matchmaker_id, :name, :age, :gender, :cnic, :cast, :maslak, :mother_tongue, :height, :complexion, :marital_status, :div_reason, :children, :education, :job, :business, :income, :area, :city, :province, :country, :full_address, :home_type, :home_size, :belongs, :photo_path, :family_status, 
+        // perform insert query with original file name. If successful, then rename file to client_id
+        $sql = "INSERT INTO 
+            clients (matchmaker_id, name, age, gender, cnic, cast, maslak, mother_tongue, height, complexion, marital_status, div_reason, children, education, job, business, income, area, city, province, country, full_address, home_type, home_size, belongs, family_status, father, mother, sisters, brothers, req_age, req_cast, req_height, req_family_status, req_maslak, req_marital_status, req_education, req_city, req_country) 
+            VALUES (:matchmaker_id, :name, :age, :gender, :cnic, :cast, :maslak, :mother_tongue, :height, :complexion, :marital_status, :div_reason, :children, :education, :job, :business, :income, :area, :city, :province, :country, :full_address, :home_type, :home_size, :belongs, :family_status, 
             :father, :mother, :sisters, :brothers, :req_age, :req_cast, :req_height, :req_family_status, :req_maslak, :req_marital_status, :req_education, :req_city, :req_country)";
 
             $params = [
-                // match parameters to values
                 ':matchmaker_id' => $this->matchmaker_id,
                 ':name' => $this->name,
                 ':age' => $this->age,
@@ -267,7 +239,7 @@ class clientModel
                 ':home_type' => $this->home_type,
                 ':home_size' => $this->home_size,
                 ':belongs' => $this->belongs,
-                ':photo_path' => $this->targetFile,
+                // ':photo_path' => $this->targetFile,
                 ':family_status' => $this->family_status,
                 ':father' => $this->father,
                 ':mother' => $this->mother,
@@ -285,7 +257,27 @@ class clientModel
             ];
 
             $stmt = $db->executePreparedStatement($sql, $params);
-            echo "success"; // Image uploaded successfully
+            if ($stmt === false) {
+                echo "dbErrorInsert";
+                return;
+            }
+
+            // now we have ID, so rename file
+            $this->targetFile = $this->target_dir . $db->getLastInsertID() . '.' . $this->imageFileType;            
+
+            $sql = "UPDATE clients SET photo_path = :photo_path WHERE id = :id";
+            $params = [
+                ':photo_path' => $this->targetFile,
+                ':id' => $db->getLastInsertID(),
+            ];
+
+            $stmt = $db->executePreparedStatement($sql, $params);
+            if ($stmt === false) {
+                echo "dbErrorUpdate";
+                return;
+            }
+        if (move_uploaded_file($this->img_tmp_name, __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ($this->targetFile))) {
+            echo "success"; // Image uploaded successfully 
         } else {
             echo "fileError"; // Error uploading file
         }
@@ -299,7 +291,7 @@ function getIncrementId()
 
     $sql = 'SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = :db AND TABLE_NAME = :tbl';
     $params = [
-        ':db' => 'matrimonial',
+        ':db' => 'DATABASE()',
         ':tbl' => 'clients',
     ];
 
@@ -312,28 +304,6 @@ function getIncrementId()
         return 1;
     }
 }
-
-// function checkForExistingRecords($matchmaker_id, $first_name, $last_name, $DOB)
-// {
-//     global $db;
-
-//     $sql = 'SELECT * FROM clients WHERE matchmaker_id = :matchmaker_id AND first_name = :first_name AND last_name = :last_name AND age = :age';
-//     $params = [
-//         ':matchmaker_id' => $matchmaker_id,
-//         ':first_name' => $first_name,
-//         ':last_name' => $last_name,
-//         ':age' => $DOB,
-//     ];
-
-//     $stmt = $db->executePreparedStatement($sql, $params);
-//     $row = $db->fetchRow($stmt);
-
-//     if ($row) {
-//         return true;
-//     } else {
-//         return false;
-//     }
-// }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

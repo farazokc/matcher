@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('includes/database.php');
+include('includes' . DIRECTORY_SEPARATOR .'database.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

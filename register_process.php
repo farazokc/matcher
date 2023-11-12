@@ -1,5 +1,5 @@
 <?php
-include(__DIR__ . '\\session.php');
+include(__DIR__ . DIRECTORY_SEPARATOR . 'session.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $first_name = $_POST['first_name'];
@@ -8,17 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $phone = $_POST['phone'];
     $password = $_POST['password'];
 
-    // removed admin option
-    // $type = $_POST['type'];
-    // $status = 0;
-
-    // if ($type == 'user') {
-    //     $status = 0;
-    // } else if ($type == 'admin') {
-    //     $status = 1;
-    // }
-
-    // only user registration available
     $type = 'user';
     $status = 0;
 
@@ -36,9 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die("Error: " . $e->getMessage());
     }
 
-    // REMOVED TYPE CHECK FOR NOW
-
-    // if ($type == 'user') {
     $sql = 'SELECT MAX(id) as id from users';
     $params = [];
 
@@ -61,12 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     try {
         $stmt = $db->executePreparedStatement($sql, $params);
-        // $row = $db->fetchRow($stmt);
 
         $current_id = $db->getLastInsertID();
-        // echo "current id: " . $current_id . "<br>";
-        // exit();
-        // unset($sql, $params, $stmt, $row);
 
         $sql = "SELECT * FROM matchmakers WHERE id = :id";
         $params = [
@@ -87,23 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['users_status'] = $status;
         $_SESSION['users_email'] = $row['email'];
 
-        // echo "SESSION Dump in register_process: <br>";
-        // echo "<pre>";
-        // echo var_dump($_SESSION);
-        // echo "</pre>";
-        // exit();
-
-        // echo "User created successfully <br>";
-        // if (file_exists('./matchmakers/view_all.php')) {
-        //     echo "Exists";
-        // } else {
-        //     echo "Doesn't exist";
-        // }
         echo "Your account has been created successfully. <br> Please wait for admin approval. <br> You will be redirected to the login page in 5 seconds. <br>";
 
         // redirect after 5 seconds
         header("refresh:5;url=./index.php");
-        // header("Location: ./index.php");
     } catch (PDOException $e) {
         die("Error: " . $e->getMessage());
     }

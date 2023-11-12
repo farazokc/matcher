@@ -1,7 +1,6 @@
 <!-- matchmakers/dashboard.php -->
 <?php
-include(__DIR__ . '\\..\\session.php');
-// include(dirname(__DIR__) . '\\session.php');
+include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'session.php');
 
 if (!isset($_SESSION['users_id']) || !isset($_SESSION['users_email'])) {
     // Redirect to login page if not logged in as a matchmaker
@@ -9,8 +8,8 @@ if (!isset($_SESSION['users_id']) || !isset($_SESSION['users_email'])) {
     exit();
 }
 
-include(__DIR__ . '/../includes/header.php');
-include(__DIR__ . '/navbar.php');
+include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'header.php');
+include(__DIR__ . DIRECTORY_SEPARATOR . 'navbar.php');
 
 global $db;
 
@@ -207,13 +206,7 @@ $user_name = $name['first_name'] . " " . $name['last_name'];
 </main>
 
 
-<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
-    <div class="col-md-4 d-flex align-items-center">
-        <span class="mb-3 ms-2 me-2 mb-md-0 lh-1">&copy; 2023 MKAGI</span>
-    </div>
-</footer>
-
-<?php include(__DIR__ . '/../includes/footer.php'); ?>
+<?php include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'footer.php'); ?>
 
 <script>
     const sendRequest = (operation, clientId) => {
@@ -225,8 +218,7 @@ $user_name = $name['first_name'] . " " . $name['last_name'];
     const deleteClient = (clientId) => {
         let confirmDelete = confirm("Are you sure you want to delete this client?");
         if (confirmDelete) {
-            console.log("Deleting client with ID: " + clientId);
-            // window.location.href = "./delete_client.php?id=" + clientId;
+            // console.log("Deleting client with ID: " + clientId);
 
             $.ajax({
                 url: "delete_client.php",

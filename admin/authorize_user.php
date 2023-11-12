@@ -1,5 +1,5 @@
 <?php
-include(__DIR__ . '/../session.php');
+include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'session.php');
 
 // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if (isset($_POST['operation']) && isset($_POST['id'])) {
