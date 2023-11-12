@@ -48,3 +48,4 @@ node_modules/
 
 # Ignore Composer lock file
 composer.lock
+capture.jpg
