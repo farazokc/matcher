@@ -16,7 +16,7 @@
         <hr class="w-100 clearfix d-md-none" />
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
           <h6 class="text-uppercase mb-4 font-weight-bold">GitHub</h6>
-          <p><i class="fa-brands fa-github"></i><a href="https://farazokc.github.io/resume.github.io/">A little about myself</a></p>
+          <p><i class="fa-brands fa-github" style="color:white;"></i><a href="https://farazokc.github.io/resume.github.io/">A little about myself</a></p>
         </div>
     </section>
   </div>
